@@ -1,5 +1,3 @@
-# food-delivered
-
 ## Project setup
 ```
 npm install
