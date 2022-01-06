@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="header">
+
+      <a class="nav-img" href="#/">
+          <img src="https://s3.bmp.ovh/imgs/2021/12/3ace3aa98a78b9bd.png">
+      </a>
+
       <div class="nav-icon">
         <a href="#">
           <i style="color: #757575" class="el-icon-shopping-cart-full"></i>
@@ -11,20 +16,20 @@
           <i style="color: #757575" class="el-icon-user"></i>
         </a>
       </div>
-      <div class="nav-item">
+      <!-- <div class="nav-item">
         <a href="#"> SERVICE </a>
+      </div> -->
+      <div class="nav-item">
+        <a href="#/information"> INFORMATION </a>
       </div>
       <div class="nav-item">
-        <a href="#"> INFORMATION </a>
+        <a href="#/store"> STORE </a>
       </div>
       <div class="nav-item">
-        <a href="#"> STORE </a>
+        <a href="#/about"> ABOUT </a>
       </div>
       <div class="nav-item">
-        <a href="#"> ABOUT </a>
-      </div>
-      <div class="nav-item">
-        <a href="#"> PRODUCTS </a>
+        <a href="#/product"> PRODUCTS </a>
       </div>
     </div>
   </div>
@@ -34,7 +39,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .header {
   color: #757575;
   background-color: white;
@@ -44,6 +49,13 @@ export default {};
   padding: 20px 60px;
   line-height: 45px;
   font-size: 25px;
+}
+.nav-img {
+  float: left;
+  display: inline-block;
+  height: 45px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .nav-icon {
   float: right;

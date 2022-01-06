@@ -1,7 +1,7 @@
 <template>
   <div>
     <headerVue></headerVue>
-    <mainVue></mainVue>
+    <router-view></router-view>
     <footerVue></footerVue>
   </div>
 </template>
@@ -20,12 +20,12 @@ export default{
   components: {
     headerVue,
     mainVue,
-    footerVue
+    footerVue,
   }
 }
 </script>
 
-<style>
+<style scoped>
 footerVue{
   flex: 1;
 }

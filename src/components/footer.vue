@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .footer{
   color: #d6d4cd;
     height: 300px;

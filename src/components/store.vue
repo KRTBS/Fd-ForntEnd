@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="storeMain">
     <div class="info">
       <div class="info-img">
           <el-image fit='fill'></el-image>
@@ -49,8 +49,8 @@ export default {
 };
 </script>
 
-<style>
-.main {
+<style scoped>
+.storeMain {
   width: 1280px;
   padding: 150px 60px;
   margin: 0 auto;

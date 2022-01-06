@@ -9,7 +9,7 @@
             </div>
             <div class="carousel-text">
               <div>{{ item.text }}</div>
-              <a class="btn" href="#"> View More </a>
+              <a class="btn" href="#/product"> View More </a>
             </div>
           </el-carousel-item>
         </el-carousel>
@@ -32,9 +32,9 @@
 
     <div class="white-one"></div>
 
-    <div class="infomation">
-      <a class="infomation-item" href="#" v-for="item in information">
-        <div class="infoImg">
+    <div class="info">
+      <a class="info-item" href="#" v-for="item in information">
+        <div class="infoImga">
           <el-image :src="item.url" fit='fill'></el-image>
         </div>
         <h1>{{item.title}}</h1>
@@ -48,27 +48,22 @@
 export default {
   data() {
     return {
-      // [{
-      //   url:'http://localhost:8080/fileSave/a261a9d2-bd84-4606-8409-98452be60524.jpg'
-      // },{
-
-      // }]
       datac: [
         {
           url: "http://localhost:8080/fileSave/a261a9d2-bd84-4606-8409-98452be60524.jpg",
-          text: "kiki Gift Set",
+          text: "title1",
         },
         {
           url: "http://localhost:8080/fileSave/cc85ed0f-c68e-44f6-8383-458b61cbf5be.jpg",
-          text: "Seasonal 5 Pieces ~ Winter ~",
+          text: "title2",
         },
         {
           url: "http://localhost:8080/fileSave/ba1d66a5-fcdb-4dfe-a3fe-cc343c31cff5.jpg",
-          text: "Gateau Chocolate 16 Pieces",
+          text: "title3",
         },
         {
           url: "http://localhost:8080/fileSave/6132c472-3111-4c00-8bc3-64470c4fe81b.jpg",
-          text: "kiki Chocolate 8 Pieces",
+          text: "title4",
         },
       ],
 
@@ -82,23 +77,23 @@ export default {
       information:[
         {
           url:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          title:"t1",
-          time:"t1a"
+          title:"title1",
+          time:"time"
         },
         {
           url:"",
-          title:"t2",
-          time:"t2a"
+          title:"title2",
+          time:"time"
         },
         {
           url:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          title:"t3",
-          time:"t3a"
+          title:"title3",
+          time:"time"
         },
         {
           url:"",
-          title:"t4",
-          time:"t4a"
+          title:"title4",
+          time:"time"
         },
       ]
 
@@ -110,7 +105,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .main {
   width: 1400px;
   padding: 150px 60px;
@@ -182,14 +177,14 @@ export default {
   word-wrap: break-word;
   word-break: break-all;
 }
-.infomation {
+.info {
   width: 1400px;
   height: 400px;
   display: flex;
   justify-content: space-between;
   /* background-color: yellow; */
 }
-.infomation-item {
+.info-item {
   display: block;
   text-decoration: none;
   color: #757575;
@@ -197,11 +192,11 @@ export default {
   height: 400px;
   background-color: rgb(235, 235, 235);
 }
-.infoImg {
+.infoImga {
   width: 300px;
   height: 300px;
 }
-.infomation-item > h1 {
+.info-item > h1 {
   margin: 0px;
   height: 49px;
   font-size: 25px;
@@ -210,7 +205,7 @@ export default {
   line-height: 49px;
   border-bottom: 1px solid#d6d4cd;
 }
-.infomation-item > h2 {
+.info-item > h2 {
   margin: 0px;
   height: 50px;
   font-size: 16px;
