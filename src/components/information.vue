@@ -1,8 +1,8 @@
 <template>
   <div class="infomation">
-    <a class="infomation-item" href="#" v-for="item in information">
+    <a class="infomation-item" @click="jump(item.id)" v-for="item in info">
       <div class="infoImg">
-        <el-image :src="item.url" fit="fill"></el-image>
+        <el-image :src="item.imgsrc" fit="fill"></el-image>
       </div>
       <h1>{{ item.title }}</h1>
       <h2>{{ item.time }}</h2>
@@ -12,41 +12,35 @@
 
 <script>
 export default {
-  data(){
-    return{
-      information:[
-        {
-          id:"1",
-          url:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          title:"t1",
-          time:"t1a"
-        },
-        {
-          id:"2",
-          url:"",
-          title:"t2",
-          time:"t2a"
-        },
-        {
-          id:"3",
-          url:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          title:"t3",
-          time:"t3a"
-        },
-        {
-          id:"4",
-          url:"",
-          title:"t4",
-          time:"t4a"
-        },
-      ]
-    }
-  }
+  created() {
+    this.getInformationList();
+  },
+  data() {
+    return {
+      info: [],
+    };
+  },
+  methods: {
+    getInformationList() {
+      this.$axios
+        .get("/api/open/information/all", {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.info = response.data.data;
+          console.log(response.data.data);
+        });
+    },
+    jump(a) {
+      this.$router.push({ name: "article", params: { id: a } });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .infomation {
+  cursor: pointer;
   width: 1400px;
 
   height: auto;
@@ -68,6 +62,11 @@ export default {
   margin-bottom: 50px;
   background-color: rgb(235, 235, 235);
 }
+
+.infomation-item:last-child:nth-child(2n - 1) {
+  margin-right: calc(500px);
+}
+
 .infoImg {
   width: 400px;
   height: 350px;

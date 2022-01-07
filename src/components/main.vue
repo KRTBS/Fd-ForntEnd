@@ -5,7 +5,7 @@
         <el-carousel height="500px" direction="vertical" :autoplay="true">
           <el-carousel-item v-for="item in datac" :key="item.value">
             <div class="carousel-img">
-              <el-image :src="item.url" fit='fill'></el-image>
+              <el-image :src="item.url" fit="fill"></el-image>
             </div>
             <div class="carousel-text">
               <div>{{ item.text }}</div>
@@ -20,12 +20,12 @@
 
     <div class="about">
       <div class="about-img">
-        <el-image :src="infod.url" fit='fill'></el-image>
+        <el-image :src="infod.url" fit="fill"></el-image>
       </div>
       <div class="about-text">
-        <h1>{{infod.title}}</h1>
+        <h1>{{ infod.title }}</h1>
         <p>
-          {{infod.content}}
+          {{ infod.content }}
         </p>
       </div>
     </div>
@@ -33,12 +33,12 @@
     <div class="white-one"></div>
 
     <div class="info">
-      <a class="info-item" href="#" v-for="item in information">
+      <a class="info-item" @click="jump(item.id)" v-for="item in info">
         <div class="infoImga">
-          <el-image :src="item.url" fit='fill'></el-image>
+          <el-image :src="item.imgsrc" fit="fill"></el-image>
         </div>
-        <h1>{{item.title}}</h1>
-        <h2>{{item.time}}</h2>
+        <h1>{{ item.title }}</h1>
+        <h2>{{ item.time }}</h2>
       </a>
     </div>
   </div>
@@ -46,6 +46,9 @@
 
 <script>
 export default {
+  created() {
+    this.getInformation()
+  },
   data() {
     return {
       datac: [
@@ -70,37 +73,35 @@ export default {
       infod: {
         url: "http://localhost:8080/fileSave/a9072fbb-c1e1-4abc-b05d-74506044aff8.jpg",
         title: "cnmcnmcnmcnmcnmcnm",
-        content: "contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent"
+        content:
+          "contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent",
       },
       url: "http://localhost:8080/fileSave/a9072fbb-c1e1-4abc-b05d-74506044aff8.jpg",
 
-      information:[
-        {
-          url:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          title:"title1",
-          time:"time"
-        },
-        {
-          url:"",
-          title:"title2",
-          time:"time"
-        },
-        {
-          url:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          title:"title3",
-          time:"time"
-        },
-        {
-          url:"",
-          title:"title4",
-          time:"time"
-        },
-      ]
-
+      info: [],
     };
   },
   methods: {
-    aa() {},
+    jump(a){
+      this.$router.push({name:'article',params:{id:a}})
+    },
+    getInformation() {
+      // this.$axios
+      //   .post("/test", {
+      //     withCredentials: false,
+      //   })
+      //   .then(function (response) {
+      //     console.log(response.data);
+      //   });
+      this.$axios
+        .get("/api/open/information/index", {
+          withCredentials: false,
+        })
+        .then( (response) => {
+          this.info = response.data.data;
+          console.log(response.data.data)
+        });
+    },
   },
 };
 </script>
@@ -164,13 +165,13 @@ export default {
   right: 0%;
   transform: translate(0%, -50%);
 }
-.about-text h1{
+.about-text h1 {
   font-size: 32px;
   line-height: 50px;
   height: 50px;
   font-weight: 200;
 }
-.about-text p{
+.about-text p {
   font-size: 16px;
   line-height: 25px;
   font-weight: 200;
@@ -178,6 +179,7 @@ export default {
   word-break: break-all;
 }
 .info {
+  cursor: pointer;
   width: 1400px;
   height: 400px;
   display: flex;

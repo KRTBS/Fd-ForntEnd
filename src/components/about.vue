@@ -6,12 +6,17 @@
 
 <script>
 export default {
-  data(){
+  created(){
+    
+  },
+  data() {
     return {
-        content:"<p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p>"
-    }
-  }
-}
+      content:
+        "<p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p>",
+    };
+  },
+  methods: {},
+};
 </script>
 
 <style scoped>
@@ -22,10 +27,10 @@ export default {
   /* background-color: cornsilk;  */
 }
 
-.aboutMain h2 {
+/* .aboutMain h2 {
   font-size: 25px;
   font-weight: 200;
   text-align: center;
   line-height: 25px;
-}
+} */
 </style>

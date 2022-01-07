@@ -8,6 +8,7 @@ import store from '@/components/store'
 import information from '@/components/information'
 import product from '@/components/product'
 import item from '@/components/item'
+import article from '@/components/article'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,9 @@ const routes = [
       },
       {
         path: '/item/:id', name: 'item', component: item
+      },
+      {
+        path: '/article/:id', name: 'article', component: article
       }
     ]
   },

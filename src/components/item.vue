@@ -10,7 +10,7 @@
         <p>{{commodity.briefIntroduction}}</p>
         <div class="select">
           <el-radio-group v-model="radio">
-            <el-radio-button :label=select v-for="select in commodity.select"></el-radio-button>
+            <el-radio-button :label=select v-for="(select, index) in commodity.select" :key="index"></el-radio-button>
           </el-radio-group>
         </div>
         <div class="number">
@@ -32,7 +32,7 @@
 <script>
 export default {
   created() {
-    console.log("child component" + this.$route.params.id);
+    // console.log("child component" + this.$route.params.id);
     this.id = this.$route.params.id;
 
     this.radio = this.commodity.select[0]
