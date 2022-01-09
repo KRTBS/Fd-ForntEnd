@@ -1,57 +1,37 @@
 <template>
   <div class="product">
-    <div class="product-item" v-for="item in product" @click="jump(item.id)">
+    <div class="product-item" v-for="item in productlist" @click="jump(item.id)">
       <div class="product-img">
-        <el-image :src="item.url" fit="fill"></el-image>
+        <el-image :src="item.imgsrc" fit="fill"></el-image>
       </div>
-      <h1>{{ item.name }}</h1>
-      <h2>{{ item.price }}</h2>
+      <h1 v-text="item.name" ></h1>
+      <h2 v-text="'¥' + item.price"></h2>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  created() {
+    this.getProductList();
+  },
   data() {
     return {
-      product: [
-        {
-          id: "1",
-          url: "https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          name: "t1",
-          price: "t1a",
-        },
-        {
-          id: "2",
-          url: "",
-          name: "t2",
-          price: "t2a",
-        },
-        {
-          id: "3",
-          url: "https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-          name: "t3",
-          price: "t3a",
-        },
-        {
-          id: "4",
-          url: "",
-          name: "t4",
-          price: "t4a",
-        },
-        {
-          id: "4",
-          url: "",
-          name: "t4",
-          price: "t4a",
-        },
-      ],
+      productlist: [],
     };
   },
   methods: {
-    jump(a) {
-      console.log(a);
-      this.$router.push({ name: "item", params: { id: a } });
+    jump(id) {
+      this.$router.push({ name: "item", params: { id: id } });
+    },
+    getProductList() {
+      this.$axios
+        .get("/api/open/product/list", {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.productlist = response.data.data;
+        });
     },
   },
 };

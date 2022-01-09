@@ -4,8 +4,8 @@
       <div class="infoImg">
         <el-image :src="item.imgsrc" fit="fill"></el-image>
       </div>
-      <h1>{{ item.title }}</h1>
-      <h2>{{ item.time }}</h2>
+      <h1 v-text="item.title" ></h1>
+      <h2 v-text="item.time"></h2>
     </a>
   </div>
 </template>
@@ -28,7 +28,6 @@ export default {
         })
         .then((response) => {
           this.info = response.data.data;
-          console.log(response.data.data);
         });
     },
     jump(a) {

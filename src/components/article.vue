@@ -1,13 +1,10 @@
 <template>
   <div class="article">
-    <div class="title">
-      {{ article.title }}
+    <div class="title" v-text="article.title">
     </div>
-    <div class="time">
-      {{ article.time }}
+    <div class="time" v-text="article.time">
     </div>
-    <div class="content">
-      {{ article.content }}
+    <div class="content" v-html="article.content">
     </div>
   </div>
 </template>
@@ -15,19 +12,11 @@
 <script>
 export default {
   created() {
-    // this.id = this.$route.params.id;
     this.getArticle(this.$route.params.id);
   },
   data() {
     return {
-    //   id: "",
-      article: {
-        // content: "2022年1月7日2022年1月7日2022年1月7日",
-        // id: 5,
-        // imgsrc: "https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-        // time: "2022年1月7日",
-        // title: "title5",
-      },
+      article: [],
     };
   },
   methods: {
@@ -38,7 +27,6 @@ export default {
         })
         .then((response) => {
           this.article = response.data.data;
-          console.log(response.data.data);
         });
     },
   },

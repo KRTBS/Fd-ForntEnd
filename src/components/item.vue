@@ -2,15 +2,23 @@
   <div class="item">
     <div class="item-main">
       <div class="itemimg">
-        <el-image :src=commodity.src fit="fill"></el-image>
+        <el-carousel height="620px">
+          <el-carousel-item v-for="(item, index) in productImg" :key="index">
+            <el-image :src="item.imgsrc" fit="fill"></el-image>
+          </el-carousel-item>
+        </el-carousel>
       </div>
       <div class="itemtext">
-        <h1>{{id}}</h1>
-        <h2>¥{{commodity.price}}</h2>
-        <p>{{commodity.briefIntroduction}}</p>
+        <h1 v-text="product.name"></h1>
+        <h2 v-text="'¥' + product.price"></h2>
+        <p v-text="product.briefinfo"></p>
         <div class="select">
           <el-radio-group v-model="radio">
-            <el-radio-button :label=select v-for="(select, index) in commodity.select" :key="index"></el-radio-button>
+            <el-radio-button
+              :label="item.select"
+              v-for="(item, index) in productSelection"
+              :key="index"
+            ></el-radio-button>
           </el-radio-group>
         </div>
         <div class="number">
@@ -25,55 +33,62 @@
         </div>
       </div>
     </div>
-    <div class="introduction">{{commodity.FullIntroduction}}</div>
+    <div class="introduction" v-html="product.fullinfo"></div>
   </div>
 </template>
 
 <script>
 export default {
   created() {
-    // console.log("child component" + this.$route.params.id);
     this.id = this.$route.params.id;
 
-    this.radio = this.commodity.select[0]
+    this.getProduct(this.id);
+    this.getProductImg(this.id);
+    this.getProductSelection(this.id);
   },
   data() {
     return {
       id: "",
+
       num: 1,
       radio: "",
-      commodity:{
-        id:"",
-        name:"i1",
-        src:"https://s4.ax1x.com/2021/12/27/TBUWmd.png",
-        price:"8888",
-        briefIntroduction:"briefIntroductionbriefIntroductionbriefIntroduction",
-        select:["小","中","大"],
-        FullIntroduction:"FullIntroductionFullIntroductionFullIntroduction"
-      }
+
+      product: {},
+      productImg: [],
+      productSelection: [],
     };
   },
   methods: {
-    add(){
-
-    }
-    // aa(){
-    //   var weekArray = [{
-    //     name:'goushi',
-    //     num:2
-    //   },{
-    //     name:'jiba',
-    //     num:3
-    //   }]
-    //   localStorage.setItem('weekDay',JSON.stringify(weekArray));
-    // },
-    // bb(){
-      // var wd = JSON.parse(localStorage.getItem('weekDay'));
-      // wd.splice(0, 1)
-      // console.log(wd)
-  //     console.log(this.radio)
-  //   }
-  }
+    add() {},
+    getProduct(id) {
+      this.$axios
+        .get("/api/open/product/" + id, {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.product = response.data.data;
+        });
+    },
+    getProductImg(id) {
+      this.$axios
+        .get("/api/open/product/carousel/" + id, {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.productImg = response.data.data;
+        });
+    },
+    getProductSelection(id) {
+      this.$axios
+        .get("/api/open/product/selection/" + id, {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.productSelection = response.data.data;
+          this.radio = response.data.data[0].select;
+        });
+    },
+  },
 };
 </script>
 

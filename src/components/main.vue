@@ -3,13 +3,13 @@
     <div class="carousel">
       <div class="block">
         <el-carousel height="500px" direction="vertical" :autoplay="true">
-          <el-carousel-item v-for="item in datac" :key="item.value">
+          <el-carousel-item v-for="item in carousel" :key="item.value">
             <div class="carousel-img">
-              <el-image :src="item.url" fit="fill"></el-image>
+              <el-image :src="item.imgsrc" fit="fill"></el-image>
             </div>
             <div class="carousel-text">
-              <div>{{ item.text }}</div>
-              <a class="btn" href="#/product"> View More </a>
+              <div v-text="item.title" ></div>
+              <a class="btn" @click="carouseljump(item.itemid)"> Buy Now </a>
             </div>
           </el-carousel-item>
         </el-carousel>
@@ -20,12 +20,11 @@
 
     <div class="about">
       <div class="about-img">
-        <el-image :src="infod.url" fit="fill"></el-image>
+        <el-image :src="intd.imgsrc" fit="fill"></el-image>
       </div>
       <div class="about-text">
-        <h1>{{ infod.title }}</h1>
-        <p>
-          {{ infod.content }}
+        <h1 v-text="intd.title"></h1>
+        <p v-text="intd.content">
         </p>
       </div>
     </div>
@@ -37,8 +36,8 @@
         <div class="infoImga">
           <el-image :src="item.imgsrc" fit="fill"></el-image>
         </div>
-        <h1>{{ item.title }}</h1>
-        <h2>{{ item.time }}</h2>
+        <h1 v-text="item.title"></h1>
+        <h2 v-text="item.time"></h2>
       </a>
     </div>
   </div>
@@ -47,59 +46,49 @@
 <script>
 export default {
   created() {
-    this.getInformation()
+    this.getInformation();
+    this.getBriefIntroduction();
+    this.getCarousel();
   },
   data() {
     return {
-      datac: [
-        {
-          url: "http://localhost:8080/fileSave/a261a9d2-bd84-4606-8409-98452be60524.jpg",
-          text: "title1",
-        },
-        {
-          url: "http://localhost:8080/fileSave/cc85ed0f-c68e-44f6-8383-458b61cbf5be.jpg",
-          text: "title2",
-        },
-        {
-          url: "http://localhost:8080/fileSave/ba1d66a5-fcdb-4dfe-a3fe-cc343c31cff5.jpg",
-          text: "title3",
-        },
-        {
-          url: "http://localhost:8080/fileSave/6132c472-3111-4c00-8bc3-64470c4fe81b.jpg",
-          text: "title4",
-        },
-      ],
-
-      infod: {
-        url: "http://localhost:8080/fileSave/a9072fbb-c1e1-4abc-b05d-74506044aff8.jpg",
-        title: "cnmcnmcnmcnmcnmcnm",
-        content:
-          "contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent",
-      },
-      url: "http://localhost:8080/fileSave/a9072fbb-c1e1-4abc-b05d-74506044aff8.jpg",
-
+      carousel: [],
+      intd: [],
       info: [],
     };
   },
   methods: {
-    jump(a){
-      this.$router.push({name:'article',params:{id:a}})
+    jump(id) {
+      this.$router.push({ name: "article", params: { id: id } });
+    },
+    carouseljump(id) {
+      this.$router.push({ name: "item", params: { id: id } });
     },
     getInformation() {
-      // this.$axios
-      //   .post("/test", {
-      //     withCredentials: false,
-      //   })
-      //   .then(function (response) {
-      //     console.log(response.data);
-      //   });
       this.$axios
         .get("/api/open/information/index", {
           withCredentials: false,
         })
-        .then( (response) => {
+        .then((response) => {
           this.info = response.data.data;
-          console.log(response.data.data)
+        });
+    },
+    getBriefIntroduction() {
+      this.$axios
+        .get("/api/open/introduction/index", {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.intd = response.data.data[0];
+        });
+    },
+    getCarousel() {
+      this.$axios
+        .get("/api/open/carousel", {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.carousel = response.data.data;
         });
     },
   },
@@ -216,6 +205,7 @@ export default {
   line-height: 50px;
 }
 .btn {
+  cursor: pointer;
   font-size: 25px;
   text-align: center;
   font-weight: 200;
