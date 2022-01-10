@@ -2,9 +2,13 @@
   <div class="infomation">
     <a class="infomation-item" @click="jump(item.id)" v-for="item in info">
       <div class="infoImg">
-        <el-image :src="item.imgsrc" fit="fill"></el-image>
+        <el-image :src="item.imgsrc" fit="fill">
+          <div slot="error" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
       </div>
-      <h1 v-text="item.title" ></h1>
+      <h1 v-text="item.title"></h1>
       <h2 v-text="item.time"></h2>
     </a>
   </div>

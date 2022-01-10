@@ -5,10 +5,14 @@
         <el-carousel height="500px" direction="vertical" :autoplay="true">
           <el-carousel-item v-for="item in carousel" :key="item.value">
             <div class="carousel-img">
-              <el-image :src="item.imgsrc" fit="fill"></el-image>
+              <el-image :src="item.imgsrc" fit="fill">
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline"></i>
+                </div>
+              </el-image>
             </div>
             <div class="carousel-text">
-              <div v-text="item.title" ></div>
+              <div v-text="item.title"></div>
               <a class="btn" @click="carouseljump(item.itemid)"> Buy Now </a>
             </div>
           </el-carousel-item>
@@ -20,12 +24,15 @@
 
     <div class="about">
       <div class="about-img">
-        <el-image :src="intd.imgsrc" fit="fill"></el-image>
+        <el-image :src="intd.imgsrc" fit="fill">
+          <div slot="error" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
       </div>
       <div class="about-text">
         <h1 v-text="intd.title"></h1>
-        <p v-text="intd.content">
-        </p>
+        <p v-text="intd.content"></p>
       </div>
     </div>
 
@@ -34,7 +41,11 @@
     <div class="info">
       <a class="info-item" @click="jump(item.id)" v-for="item in info">
         <div class="infoImga">
-          <el-image :src="item.imgsrc" fit="fill"></el-image>
+          <el-image :src="item.imgsrc" fit="fill">
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
         </div>
         <h1 v-text="item.title"></h1>
         <h2 v-text="item.time"></h2>

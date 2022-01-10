@@ -2,27 +2,29 @@
   <div class="storeMain">
     <div class="info">
       <div class="info-img">
-          <el-image fit='fill'></el-image>
+        <el-image :src="storeInfo.imgsrc" fit="cover">
+          <div slot="error" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
       </div>
       <div class="info-text">
-        <p>
-          {{storeInfo.briefinfo}}
-        </p>
+        <p v-text="storeInfo.briefinfo"></p>
         <dl>
           <dt>Address:</dt>
-          <dd>{{storeInfo.address}}</dd>
+          <dd v-text="storeInfo.address"></dd>
           <dt>Telephone:</dt>
-          <dd>{{storeInfo.telephone}}</dd>
+          <dd v-text="storeInfo.telephone"></dd>
           <dt>Business Hours:</dt>
-          <dd>{{storeInfo.businesshours}}</dd>
+          <dd v-text="storeInfo.businesshours"></dd>
           <dt>Off Days:</dt>
-          <dd>{{storeInfo.offdays}}</dd>
+          <dd v-text="storeInfo.offdays"></dd>
         </dl>
       </div>
     </div>
     <div class="location">
       <!-- <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23116.66046040093!2d114.32302671984321!3d30.540484060372005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x342eafc7609fc5f5%3A0x589c52e877def5a!2z6buE6bmk5qW8!5e0!3m2!1szh-CN!2sus!4v1640668005852!5m2!1szh-CN!2sus"
+        :src="storeInfo.googlemapsrc"
         width="1280"
         height="600"
         style="border: 0"
@@ -35,16 +37,24 @@
 
 <script>
 export default {
+  created() {
+    this.getStoreInfo();
+  },
   data() {
     return {
-      storeInfo:{
-        briefinfo: "briefinfobriefinfo",
-        address: "addressaddressaddress",
-        telephone: "telephonetelephonetelephone",
-        businesshours: "businesshoursbusinesshours",
-        offdays: "offdaysoffdaysoffdays"
-      }
+      storeInfo: {},
     };
+  },
+  methods: {
+    getStoreInfo() {
+      this.$axios
+        .get("/api/open/information/store", {
+          withCredentials: false,
+        })
+        .then((response) => {
+          this.storeInfo = response.data.data;
+        });
+    },
   },
 };
 </script>
@@ -73,7 +83,7 @@ export default {
   background-color: rgb(250, 250, 250);
 }
 .info-text p {
-    display: block;
+  display: block;
   font-size: 16px;
   line-height: 25px;
   font-weight: 200;
@@ -83,14 +93,13 @@ export default {
   margin-bottom: 50px;
 }
 .info-text dl dd {
-
-font-weight: 200;
+  font-weight: 200;
 
   padding: 0 0 0 6em;
   display: block;
 }
 .info-text dl dt {
-    font-weight: 200;
+  font-weight: 200;
   position: relative;
   top: 21px;
 }

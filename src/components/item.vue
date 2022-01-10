@@ -4,7 +4,11 @@
       <div class="itemimg">
         <el-carousel height="620px">
           <el-carousel-item v-for="(item, index) in productImg" :key="index">
-            <el-image :src="item.imgsrc" fit="fill"></el-image>
+            <el-image :src="item.imgsrc" fit="fill">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -56,10 +60,46 @@ export default {
       product: {},
       productImg: [],
       productSelection: [],
+
+      orderForm:{
+        itemID:"",
+        itemName:"",
+        itemPrice:"",
+        itemSelection:"",
+        itemNum:"",
+      }
     };
   },
   methods: {
-    add() {},
+    add() {
+      console.log( this.product.name +"/"+ this.product.price +"/"+ this.radio +"/"+ this.num)
+
+      this.orderForm.itemID = this.id;
+      this.orderForm.itemName = this.product.name;
+      this.orderForm.itemPrice = this.product.price;
+      this.orderForm.itemSelection = this.radio;
+      this.orderForm.itemNum = this.num;
+
+      if (localStorage.getItem('orderFormList') == null) {
+        var orderFormList = [];
+        orderFormList.push(
+          JSON.stringify(this.orderForm)
+        );
+
+        localStorage.setItem('orderFormList', JSON.stringify(orderFormList));
+
+      } else {
+        var orderFormList = JSON.parse(localStorage.getItem('orderFormList'));
+        orderFormList.push(
+          JSON.stringify(this.orderForm)
+        );
+
+        localStorage.setItem('orderFormList', JSON.stringify(orderFormList));
+      }
+      
+
+
+    },
     getProduct(id) {
       this.$axios
         .get("/api/open/product/" + id, {
@@ -119,7 +159,7 @@ export default {
   width: 620px;
   height: 620px;
   float: left;
-  /* background-color: burlywood; */
+  background-color: burlywood;
 }
 .itemtext {
   width: 580px;
