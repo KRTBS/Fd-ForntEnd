@@ -61,44 +61,47 @@ export default {
       productImg: [],
       productSelection: [],
 
-      orderForm:{
-        itemID:"",
-        itemName:"",
-        itemPrice:"",
-        itemSelection:"",
-        itemNum:"",
-      }
+      orderForm: {
+        itemID: "",
+        itemName: "",
+        itemPrice: "",
+        itemSelection: "",
+        itemNum: "",
+        subtotal: "",
+      },
     };
   },
   methods: {
     add() {
-      console.log( this.product.name +"/"+ this.product.price +"/"+ this.radio +"/"+ this.num)
+      console.log(
+        this.product.name +
+          "/" +
+          this.product.price +
+          "/" +
+          this.radio +
+          "/" +
+          this.num
+      );
 
       this.orderForm.itemID = this.id;
       this.orderForm.itemName = this.product.name;
       this.orderForm.itemPrice = this.product.price;
       this.orderForm.itemSelection = this.radio;
       this.orderForm.itemNum = this.num;
+      this.orderForm.subtotal =
+        this.orderForm.itemNum * this.orderForm.itemPrice;
 
-      if (localStorage.getItem('orderFormList') == null) {
+      if (localStorage.getItem("orderFormList") == null) {
         var orderFormList = [];
-        orderFormList.push(
-          JSON.stringify(this.orderForm)
-        );
+        orderFormList.push(this.orderForm);
 
-        localStorage.setItem('orderFormList', JSON.stringify(orderFormList));
-
+        localStorage.setItem("orderFormList", JSON.stringify(orderFormList));
       } else {
-        var orderFormList = JSON.parse(localStorage.getItem('orderFormList'));
-        orderFormList.push(
-          JSON.stringify(this.orderForm)
-        );
+        var orderFormList = JSON.parse(localStorage.getItem("orderFormList"));
+        orderFormList.push(this.orderForm);
 
-        localStorage.setItem('orderFormList', JSON.stringify(orderFormList));
+        localStorage.setItem("orderFormList", JSON.stringify(orderFormList));
       }
-      
-
-
     },
     getProduct(id) {
       this.$axios

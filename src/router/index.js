@@ -9,6 +9,7 @@ import information from '@/components/information'
 import product from '@/components/product'
 import item from '@/components/item'
 import article from '@/components/article'
+import cart from '@/components/cart'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,9 @@ const routes = [
       },
       {
         path: '/article/:id', name: 'article', component: article
+      },
+      {
+        path: '/cart', component: cart
       }
     ]
   },

@@ -7,7 +7,7 @@
       </a>
 
       <div class="nav-icon">
-        <a href="#">
+        <a href="#/cart">
           <i style="color: #757575" class="el-icon-shopping-cart-full"></i>
         </a>
       </div>
