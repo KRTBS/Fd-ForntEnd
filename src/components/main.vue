@@ -3,7 +3,7 @@
     <div class="carousel">
       <div class="block">
         <el-carousel height="500px" direction="vertical" :autoplay="true">
-          <el-carousel-item v-for="item in carousel" :key="item.value">
+          <el-carousel-item v-for="(item, index) in carousel" :key="index">
             <div class="carousel-img">
               <el-image :src="item.imgsrc" fit="fill">
                 <div slot="error" class="image-slot">
@@ -56,54 +56,54 @@
 
 <script>
 export default {
-  created() {
-    this.getInformation();
-    this.getBriefIntroduction();
-    this.getCarousel();
+  created () {
+    this.getInformation()
+    this.getBriefIntroduction()
+    this.getCarousel()
   },
-  data() {
+  data () {
     return {
       carousel: [],
       intd: [],
-      info: [],
-    };
+      info: []
+    }
   },
   methods: {
-    jump(id) {
-      this.$router.push({ name: "article", params: { id: id } });
+    jump (id) {
+      this.$router.push({ name: 'article', params: { id: id } })
     },
-    carouseljump(id) {
-      this.$router.push({ name: "item", params: { id: id } });
+    carouseljump (id) {
+      this.$router.push({ name: 'item', params: { id: id } })
     },
-    getInformation() {
+    getInformation () {
       this.$axios
-        .get("/api/open/information/index", {
-          withCredentials: false,
+        .get('/api/open/information/index', {
+          withCredentials: false
         })
         .then((response) => {
-          this.info = response.data.data;
-        });
+          this.info = response.data.data
+        })
     },
-    getBriefIntroduction() {
+    getBriefIntroduction () {
       this.$axios
-        .get("/api/open/introduction/index", {
-          withCredentials: false,
+        .get('/api/open/introduction/index', {
+          withCredentials: false
         })
         .then((response) => {
-          this.intd = response.data.data[0];
-        });
+          this.intd = response.data.data[0]
+        })
     },
-    getCarousel() {
+    getCarousel () {
       this.$axios
-        .get("/api/open/carousel", {
-          withCredentials: false,
+        .get('/api/open/carousel', {
+          withCredentials: false
         })
         .then((response) => {
-          this.carousel = response.data.data;
-        });
-    },
-  },
-};
+          this.carousel = response.data.data
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

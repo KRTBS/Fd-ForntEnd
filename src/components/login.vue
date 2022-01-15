@@ -31,46 +31,46 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       loginForm: {
-        username: "",
-        password: "",
-      },
-    };
+        username: '',
+        password: ''
+      }
+    }
   },
   methods: {
-    login() {
+    login () {
       this.$axios
-        .post("/login", this.loginForm, {
-          withCredentials: false,
+        .post('/login', this.loginForm, {
+          withCredentials: false
         })
         .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success('Login Successful');
-            window.sessionStorage.setItem("token",response.data.data);
-            this.$router.push("/home")
+          if (response.data.code === 200) {
+            this.$message.success('Login Successful')
+            window.sessionStorage.setItem('token', response.data.data)
+            this.$router.push('/home')
           } else {
-            this.$message.error('Login Failed');
+            this.$message.error('Login Failed')
           }
-        });
+        })
     },
-    test() {
+    test () {
       this.$axios
-        .post("/test", {
-          withCredentials: false,
+        .post('/test', {
+          withCredentials: false
         })
         .then(function (response) {
-          console.log(response.data);
-        });
+          console.log(response.data)
+        })
     },
-    sb() {
-      this.$alert("这是一段内容", "标题名称", {
-        confirmButtonText: "确定",
-      });
-    },
-  },
-};
+    sb () {
+      this.$alert('这是一段内容', '标题名称', {
+        confirmButtonText: '确定'
+      })
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

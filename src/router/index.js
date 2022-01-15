@@ -11,6 +11,10 @@ import item from '@/components/item'
 import article from '@/components/article'
 import cart from '@/components/cart'
 
+import manage from '@/views/manage'
+import mwelcome from '@/components/manage/mwelcome'
+import mcarousel from '@/components/manage/mcarousel'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -49,6 +53,20 @@ const routes = [
   {
     path: '/login', component: login
   },
+  {
+    path: '/manage', component: manage,
+    children: [
+      {
+        path: '', component: mwelcome,
+      },
+      {
+        path: '/welcome', component: mwelcome,
+      },
+      {
+        path: '/carousel', component: mcarousel,
+      },
+    ]
+  }
 ]
 
 const router = new VueRouter({

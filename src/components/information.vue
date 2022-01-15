@@ -1,6 +1,6 @@
 <template>
   <div class="infomation">
-    <a class="infomation-item" @click="jump(item.id)" v-for="item in info">
+    <a class="infomation-item" @click="jump(item.id)" v-for="(item,index) in info" :key="index">
       <div class="infoImg">
         <el-image :src="item.imgsrc" fit="fill">
           <div slot="error" class="image-slot">
@@ -16,29 +16,29 @@
 
 <script>
 export default {
-  created() {
-    this.getInformationList();
+  created () {
+    this.getInformationList()
   },
-  data() {
+  data () {
     return {
-      info: [],
-    };
+      info: []
+    }
   },
   methods: {
-    getInformationList() {
+    getInformationList () {
       this.$axios
-        .get("/api/open/information/all", {
-          withCredentials: false,
+        .get('/api/open/information/all', {
+          withCredentials: false
         })
         .then((response) => {
-          this.info = response.data.data;
-        });
+          this.info = response.data.data
+        })
     },
-    jump(a) {
-      this.$router.push({ name: "article", params: { id: a } });
-    },
-  },
-};
+    jump (a) {
+      this.$router.push({ name: 'article', params: { id: a } })
+    }
+  }
+}
 </script>
 
 <style scoped>

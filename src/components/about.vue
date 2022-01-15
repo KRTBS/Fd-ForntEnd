@@ -6,17 +6,17 @@
 
 <script>
 export default {
-  created(){
-    
+  created () {
+
   },
-  data() {
+  data () {
     return {
       content:
-        "<p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p>",
-    };
+        '<p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p>'
+    }
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped>

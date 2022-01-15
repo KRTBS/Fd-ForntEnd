@@ -11,26 +11,26 @@
 
 <script>
 export default {
-  created() {
-    this.getArticle(this.$route.params.id);
+  created () {
+    this.getArticle(this.$route.params.id)
   },
-  data() {
+  data () {
     return {
-      article: [],
-    };
+      article: []
+    }
   },
   methods: {
-    getArticle(id) {
+    getArticle (id) {
       this.$axios
-        .get("/api/open/information/" + id, {
-          withCredentials: false,
+        .get('/api/open/information/' + id, {
+          withCredentials: false
         })
         .then((response) => {
-          this.article = response.data.data;
-        });
-    },
-  },
-};
+          this.article = response.data.data
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

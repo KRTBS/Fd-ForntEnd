@@ -19,7 +19,7 @@ export default {
   color: #d6d4cd;
     height: 300px;
     /* color: #d6d4cd; */
-    
+
     background-color: #354345;
     padding: 115px;
 }

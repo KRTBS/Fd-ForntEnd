@@ -31,12 +31,15 @@
       <div class="nav-item">
         <a href="#/product"> PRODUCTS </a>
       </div>
+      <div class="nav-item">
+        <a href="#/manage"> MS </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style scoped>

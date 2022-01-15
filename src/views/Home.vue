@@ -8,19 +8,18 @@
 
 <script>
 import headerVue from '@/components/header.vue'
-import mainVue from '@/components/main.vue'
+// import mainVue from '@/components/main.vue'
 import footerVue from '../components/footer.vue'
-
-export default{
+export default {
   data () {
     return {
-      
+
     }
   },
   components: {
     headerVue,
-    mainVue,
-    footerVue,
+    // mainVue,
+    footerVue
   }
 }
 </script>

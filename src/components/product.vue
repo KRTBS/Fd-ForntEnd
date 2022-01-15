@@ -12,29 +12,29 @@
 
 <script>
 export default {
-  created() {
-    this.getProductList();
+  created () {
+    this.getProductList()
   },
-  data() {
+  data () {
     return {
-      productlist: [],
-    };
+      productlist: []
+    }
   },
   methods: {
-    jump(id) {
-      this.$router.push({ name: "item", params: { id: id } });
+    jump (id) {
+      this.$router.push({ name: 'item', params: { id: id } })
     },
-    getProductList() {
+    getProductList () {
       this.$axios
-        .get("/api/open/product/list", {
-          withCredentials: false,
+        .get('/api/open/product/list', {
+          withCredentials: false
         })
         .then((response) => {
-          this.productlist = response.data.data;
-        });
-    },
-  },
-};
+          this.productlist = response.data.data
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

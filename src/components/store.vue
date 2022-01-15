@@ -37,26 +37,26 @@
 
 <script>
 export default {
-  created() {
-    this.getStoreInfo();
+  created () {
+    this.getStoreInfo()
   },
-  data() {
+  data () {
     return {
-      storeInfo: {},
-    };
+      storeInfo: {}
+    }
   },
   methods: {
-    getStoreInfo() {
+    getStoreInfo () {
       this.$axios
-        .get("/api/open/information/store", {
-          withCredentials: false,
+        .get('/api/open/information/store', {
+          withCredentials: false
         })
         .then((response) => {
-          this.storeInfo = response.data.data;
-        });
-    },
-  },
-};
+          this.storeInfo = response.data.data
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

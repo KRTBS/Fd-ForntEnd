@@ -1,5 +1,6 @@
 <template>
   <div class="cart">
+    <span>x1sssdddsdx</span>
     <div class="cart-table">
       <el-table style="width: 100%" :data="orderForm">
         <el-table-column prop="itemName" label="Name"> </el-table-column>
@@ -48,86 +49,86 @@
 
 <script>
 export default {
-  created() {
-    this.orderForm = JSON.parse(localStorage.getItem("orderFormList"));
+  created () {
+    this.orderForm = JSON.parse(localStorage.getItem('orderFormList'))
 
-    this.updataSubtotal();
+    this.updataSubtotal()
   },
 
   watch: {
     orderForm: {
       handler: function (newVal, oldVal) {
         this.orderForm.forEach((element) => {
-          element.subtotal = element.itemNum * element.itemPrice;
+          element.subtotal = element.itemNum * element.itemPrice
           if (this.orderForm != null) {
-            this.updateOrderList(this.orderForm);
+            this.updateOrderList(this.orderForm)
           }
-        });
+        })
 
-        this.updataSubtotal();
+        this.updataSubtotal()
       },
       deep: true,
-      immediate: true,
-    },
+      immediate: true
+    }
   },
 
-  data() {
+  data () {
     return {
       num: 1,
       orderForm: [],
       counter: 1,
-      total: 0,
-    };
+      total: 0
+    }
   },
   methods: {
-    updateOrderList(list) {
-      localStorage.setItem("orderFormList", JSON.stringify(list));
+    updateOrderList (list) {
+      localStorage.setItem('orderFormList', JSON.stringify(list))
     },
-    updataSubtotal() {
-      this.total = 0;
+    updataSubtotal () {
+      this.total = 0
       for (var value of this.orderForm) {
-        this.total = this.total + value.subtotal;
+        this.total = this.total + value.subtotal
       }
     },
-    handleDelete(index) {
+    handleDelete (index) {
       // console.log(index);
-      this.orderForm.splice(index, 1);
+      this.orderForm.splice(index, 1)
     },
-    submit() {
+    submit () {
       this.$axios
-        .post("/api/open/order/submit", this.orderForm, {
-          withCredentials: false,
+        .post('/api/open/order/submit', this.orderForm, {
+          withCredentials: false
         })
         .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success("Login Successful");
+          if (response.data.code === 200) {
+            this.$message.success('Login Successful')
             // window.sessionStorage.setItem("token", response.data.data);
             // this.$router.push("/home");
           } else {
-            this.$message.error("Login Failed");
+            this.$message.error('Login Failed')
           }
-        });
+        })
     },
-    test(){
+    test () {
       this.$axios
-        .get("/test", {
-          withCredentials: false,
+        .get('/test', {
+          withCredentials: false
         })
         .then((response) => {
-          this.$message.success(response.data.data);
-        });
+          this.$message.success(response.data.data)
+        })
     },
-    dest(){
+    dest () {
       this.$axios
-        .get("/dest", {
-          withCredentials: false,
+        .get('/dest', {
+          withCredentials: false
         })
         .then((response) => {
-          this.$message.success(response.data.data);
-        });
+          this.$message.success(response.data.data)
+        })
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

@@ -43,96 +43,96 @@
 
 <script>
 export default {
-  created() {
-    this.id = this.$route.params.id;
+  created () {
+    this.id = this.$route.params.id
 
-    this.getProduct(this.id);
-    this.getProductImg(this.id);
-    this.getProductSelection(this.id);
+    this.getProduct(this.id)
+    this.getProductImg(this.id)
+    this.getProductSelection(this.id)
   },
-  data() {
+  data () {
     return {
-      id: "",
+      id: '',
 
       num: 1,
-      radio: "",
+      radio: '',
 
       product: {},
       productImg: [],
       productSelection: [],
 
       orderForm: {
-        itemID: "",
-        itemName: "",
-        itemPrice: "",
-        itemSelection: "",
-        itemNum: "",
-        subtotal: "",
-      },
-    };
+        itemID: '',
+        itemName: '',
+        itemPrice: '',
+        itemSelection: '',
+        itemNum: '',
+        subtotal: ''
+      }
+    }
   },
   methods: {
-    add() {
+    add () {
       console.log(
         this.product.name +
-          "/" +
+          '/' +
           this.product.price +
-          "/" +
+          '/' +
           this.radio +
-          "/" +
+          '/' +
           this.num
-      );
+      )
 
-      this.orderForm.itemID = this.id;
-      this.orderForm.itemName = this.product.name;
-      this.orderForm.itemPrice = this.product.price;
-      this.orderForm.itemSelection = this.radio;
-      this.orderForm.itemNum = this.num;
+      this.orderForm.itemID = this.id
+      this.orderForm.itemName = this.product.name
+      this.orderForm.itemPrice = this.product.price
+      this.orderForm.itemSelection = this.radio
+      this.orderForm.itemNum = this.num
       this.orderForm.subtotal =
-        this.orderForm.itemNum * this.orderForm.itemPrice;
+        this.orderForm.itemNum * this.orderForm.itemPrice
 
-      if (localStorage.getItem("orderFormList") == null) {
-        var orderFormList = [];
-        orderFormList.push(this.orderForm);
+      if (localStorage.getItem('orderFormList') == null) {
+        var orderFormList = []
+        orderFormList.push(this.orderForm)
 
-        localStorage.setItem("orderFormList", JSON.stringify(orderFormList));
+        localStorage.setItem('orderFormList', JSON.stringify(orderFormList))
       } else {
-        var orderFormList = JSON.parse(localStorage.getItem("orderFormList"));
-        orderFormList.push(this.orderForm);
+        var orderFormList = JSON.parse(localStorage.getItem('orderFormList'))
+        orderFormList.push(this.orderForm)
 
-        localStorage.setItem("orderFormList", JSON.stringify(orderFormList));
+        localStorage.setItem('orderFormList', JSON.stringify(orderFormList))
       }
     },
-    getProduct(id) {
+    getProduct (id) {
       this.$axios
-        .get("/api/open/product/" + id, {
-          withCredentials: false,
+        .get('/api/open/product/' + id, {
+          withCredentials: false
         })
         .then((response) => {
-          this.product = response.data.data;
-        });
+          this.product = response.data.data
+        })
     },
-    getProductImg(id) {
+    getProductImg (id) {
       this.$axios
-        .get("/api/open/product/carousel/" + id, {
-          withCredentials: false,
+        .get('/api/open/product/carousel/' + id, {
+          withCredentials: false
         })
         .then((response) => {
-          this.productImg = response.data.data;
-        });
+          this.productImg = response.data.data
+        })
     },
-    getProductSelection(id) {
+    getProductSelection (id) {
       this.$axios
-        .get("/api/open/product/selection/" + id, {
-          withCredentials: false,
+        .get('/api/open/product/selection/' + id, {
+          withCredentials: false
         })
         .then((response) => {
-          this.productSelection = response.data.data;
-          this.radio = response.data.data[0].select;
-        });
-    },
-  },
-};
+          this.productSelection = response.data.data
+          this.radio = response.data.data[0].select
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
