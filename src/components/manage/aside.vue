@@ -10,7 +10,7 @@
         <span slot="title">Carousel</span>
       </el-menu-item>
 
-      <el-menu-item index="3">
+      <el-menu-item index="beiefinfo">
         <span slot="title">BeiefInfo </span>
       </el-menu-item>
 

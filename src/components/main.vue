@@ -32,7 +32,7 @@
       </div>
       <div class="about-text">
         <h1 v-text="intd.title"></h1>
-        <p v-text="intd.content"></p>
+        <p v-html="intd.content"></p>
       </div>
     </div>
 

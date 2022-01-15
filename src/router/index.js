@@ -12,8 +12,9 @@ import article from '@/components/article'
 import cart from '@/components/cart'
 
 import manage from '@/views/manage'
-import mwelcome from '@/components/manage/mwelcome'
-import mcarousel from '@/components/manage/mcarousel'
+import welcome from '@/components/manage/welcome'
+import carousel from '@/components/manage/carousel'
+import briefInfo from '@/components/manage/briefInfo'
 
 Vue.use(VueRouter)
 
@@ -57,13 +58,16 @@ const routes = [
     path: '/manage', component: manage,
     children: [
       {
-        path: '', component: mwelcome,
+        path: '', component: welcome,
       },
       {
-        path: '/welcome', component: mwelcome,
+        path: '/welcome', component: welcome,
       },
       {
-        path: '/carousel', component: mcarousel,
+        path: '/carousel', component: carousel,
+      },
+      {
+        path: '/beiefinfo', component: briefInfo,
       },
     ]
   }
