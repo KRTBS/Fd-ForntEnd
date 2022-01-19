@@ -3,7 +3,7 @@
     <div class="aside-head"></div>
     <el-menu default-active="welcome" class="el-menu-vertical-demo" router>
       <el-menu-item index="welcome">
-        <span slot="title">welcome</span>
+        <span slot="title">Welcome</span>
       </el-menu-item>
 
       <el-menu-item index="carousel">
@@ -24,7 +24,7 @@
         </el-menu-item-group>
       </el-submenu> -->
 
-      <el-menu-item index="product">
+      <el-menu-item index="productAdmin">
         <span slot="title">Product</span>
       </el-menu-item>
 

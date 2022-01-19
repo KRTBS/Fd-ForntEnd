@@ -11,70 +11,95 @@ import item from '@/components/item'
 import article from '@/components/article'
 import cart from '@/components/cart'
 
-import manage from '@/views/manage'
-import welcome from '@/components/manage/welcome'
-import carousel from '@/components/manage/carousel'
-import briefInfo from '@/components/manage/briefInfo'
+import admin from '@/views/admin'
+import welcome from '@/components/admin/welcome'
+import carousel from '@/components/admin/carousel'
+import briefInfo from '@/components/admin/briefInfo'
+import productAdmin from '@/components/admin/product'
+import productEdit from '@/components/admin/productEdit'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/', redirect: '/home'
-  },
-  {
-    path: '/home', component: home,
-    children: [
-      {
-        path: '', component: main
-      },
-      {
-        path: '/about', component: about
-      },
-      {
-        path: '/information', component: information
-      },
-      {
-        path: '/store', component: store
-      },
-      {
-        path: '/product', component: product
-      },
-      {
-        path: '/item/:id', name: 'item', component: item
-      },
-      {
-        path: '/article/:id', name: 'article', component: article
-      },
-      {
-        path: '/cart', component: cart
-      }
-    ]
-  },
-  {
-    path: '/login', component: login
-  },
-  {
-    path: '/manage', component: manage,
-    children: [
-      {
-        path: '', component: welcome,
-      },
-      {
-        path: '/welcome', component: welcome,
-      },
-      {
-        path: '/carousel', component: carousel,
-      },
-      {
-        path: '/beiefinfo', component: briefInfo,
-      },
-    ]
-  }
+const routes = [{
+        path: '/',
+        redirect: '/home'
+    },
+    {
+        path: '/home',
+        component: home,
+        children: [{
+                path: '',
+                component: main
+            },
+            {
+                path: '/about',
+                component: about
+            },
+            {
+                path: '/information',
+                component: information
+            },
+            {
+                path: '/store',
+                component: store
+            },
+            {
+                path: '/product',
+                component: product
+            },
+            {
+                path: '/item/:id',
+                name: 'item',
+                component: item
+            },
+            {
+                path: '/article/:id',
+                name: 'article',
+                component: article
+            },
+            {
+                path: '/cart',
+                component: cart
+            }
+        ]
+    },
+    {
+        path: '/login',
+        component: login
+    },
+    {
+        path: '/admin',
+        component: admin,
+        children: [{
+                path: '',
+                component: welcome,
+            },
+            {
+                path: '/welcome',
+                component: welcome,
+            },
+            {
+                path: '/carousel',
+                component: carousel,
+            },
+            {
+                path: '/beiefinfo',
+                component: briefInfo,
+            },
+            {
+                path: '/productAdmin',
+                component: productAdmin,
+            }, {
+                path: '/productEdit/:id',
+                name: 'productEdit',
+                component: productEdit,
+            }
+        ]
+    }
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 //路由导航守卫

@@ -32,6 +32,7 @@
       </el-table-column>
     </el-table>
 
+
     <el-dialog title="Update" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="ImgSrc" :label-width.sync="formLabelWidth">
@@ -43,9 +44,10 @@
         <el-form-item label="Product" :label-width.sync="formLabelWidth">
           <el-select v-model="form.itemid" placeholder="Select bundle product">
             <el-option
-              v-for="item in productlist"
+              v-for="(item, index) in productlist"
               :label="item.name"
               :value="item.id"
+              :key=index
             ></el-option>
           </el-select>
         </el-form-item>
@@ -69,9 +71,10 @@
         <el-form-item label="Product" :label-width.sync="formLabelWidth">
           <el-select v-model="form.itemid" placeholder="Select bundle product">
             <el-option
-              v-for="item in productlist"
+              v-for="(item, index) in productlist"
               :label="item.name"
               :value="item.id"
+              :key=index
             ></el-option>
           </el-select>
         </el-form-item>

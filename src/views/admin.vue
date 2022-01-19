@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import maside from '@/components/manage/aside.vue';
-import mheader from '@/components/manage/header.vue'
+import maside from '@/components/admin/aside.vue';
+import mheader from '@/components/admin/header.vue'
 export default {
   components:{
       maside,

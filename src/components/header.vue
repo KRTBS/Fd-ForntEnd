@@ -32,7 +32,7 @@
         <a href="#/product"> PRODUCTS </a>
       </div>
       <div class="nav-item">
-        <a href="#/manage"> MS </a>
+        <a href="#/admin"> Admin </a>
       </div>
     </div>
   </div>
