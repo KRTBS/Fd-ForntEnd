@@ -60,6 +60,7 @@ export default {
   },
   methods: {
     getBeifrIntroduction() {
+        var that = this;
         this.$axios
         .get("/api/open/introduction/index", {
           withCredentials: false,
@@ -67,12 +68,16 @@ export default {
         .then((response) => {
           this.Introduction = response.data.data[0];
           this.editor.txt.append(response.data.data[0].content)
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
     handleSubmit(){
       this.dialogVisible = true;
     },
     confirmChanges() {
+      var that = this;
 
       this.Introduction.content = this.editorData;
 
@@ -84,14 +89,11 @@ export default {
           if (response.data.code == 200) {
             this.$message.success(response.data.msg);
             this.dialogVisible = false;
-          } else {
-            this.$message.error(response.data.msg);
-            this.dialogVisible = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
-
-
-      console.log(this.Introduction)
     },
   },
 };

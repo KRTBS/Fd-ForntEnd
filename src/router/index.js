@@ -17,6 +17,9 @@ import carousel from '@/components/admin/carousel'
 import briefInfo from '@/components/admin/briefInfo'
 import productAdmin from '@/components/admin/product'
 import productEdit from '@/components/admin/productEdit'
+import storeAdmin from '@/components/admin/storeAdmin'
+import info from '@/components/admin/info'
+import infoEdit from '@/components/admin/infoEdit'
 
 Vue.use(VueRouter)
 
@@ -89,10 +92,24 @@ const routes = [{
             {
                 path: '/productAdmin',
                 component: productAdmin,
-            }, {
+            },
+            {
                 path: '/productEdit/:id',
                 name: 'productEdit',
                 component: productEdit,
+            },
+            {
+                path: '/storeAdmin',
+                component: storeAdmin,
+            },
+            {
+                path: '/info',
+                component: info,
+            },
+            {
+                path: '/infoEdit/:id',
+                name: 'infoEdit',
+                component: infoEdit,
             }
         ]
     }

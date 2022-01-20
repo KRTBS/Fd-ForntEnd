@@ -156,23 +156,24 @@ export default {
     },
 
     confirmUpdateEdit() {
+      var that = this;
       this.$axios
         .put("/api/auth/carousel", this.form, {
           withCredentials: false,
         })
         .then((response) => {
-          // this.productlist = response.data.data;
           if (response.data.code == 200) {
             this.$message.success(response.data.msg);
             this.dialogFormVisible = false;
             this.getCarousel();
-          } else {
-            this.$message.error(response.data.msg);
-            this.dialogFormVisible = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
     confirmDelete(){
+      var that = this;
       this.$axios
         .delete("/api/auth/carousel/"+this.id, {
           withCredentials: false,
@@ -182,13 +183,14 @@ export default {
             this.$message.success(response.data.msg);
             this.dialogDeleteVisible = false;
             this.getCarousel();
-          } else {
-            this.$message.error(response.data.msg);
-            this.dialogDeleteVisible = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
     confirmAdd(){
+      var that = this;
       this.$axios
         .post("/api/auth/carousel", this.form, {
           withCredentials: false,
@@ -198,10 +200,10 @@ export default {
             this.$message.success(response.data.msg);
             this.dialogAddFormVisible = false;
             this.getCarousel();
-          } else {
-            this.$message.error(response.data.msg);
-            this.dialogAddFormVisible = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     }
   },

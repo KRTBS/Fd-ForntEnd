@@ -31,7 +31,7 @@
       <div>
         <el-input
           v-model="product.imgsrc"
-          placeholder="Input Cover Image"
+          placeholder="Require 400 x 400 size image"
         ></el-input>
       </div>
     </div>
@@ -255,6 +255,7 @@ export default {
       this.tagForm = tag;
     },
     deleteTag() {
+      var that = this;
       this.$axios
         .delete("/api/auth/product/selection/" + this.tagForm.id, {
           withCredentials: false,
@@ -264,10 +265,10 @@ export default {
             this.$message.success(response.data.msg);
             this.DeleteTagDialogVisiable = false;
             this.getProductSelection(this.id);
-          } else {
-            this.$message.error(response.data.msg);
-            this.DeleteTagDialogVisiable = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
 
@@ -279,6 +280,7 @@ export default {
     },
 
     addTag() {
+      var that = this;
       this.$axios
         .post("/api/auth/product/selection",this.tagForm, {
           withCredentials: false,
@@ -288,10 +290,10 @@ export default {
             this.$message.success(response.data.msg);
             this.AddNewTagDialogVisiable = false;
             this.getProductSelection(this.id);
-          } else {
-            this.$message.error(response.data.msg);
-            this.AddNewTagDialogVisiable = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
 
@@ -301,6 +303,7 @@ export default {
     },
 
     deleteImgSrc(){
+      var that = this;
       this.$axios
         .delete("/api/auth/product/carousel/" + this.imgForm.id, {
           withCredentials: false,
@@ -310,10 +313,10 @@ export default {
             this.$message.success(response.data.msg);
             this.DeleteImgDialogVisiable = false;
             this.getProductImg(this.id);
-          } else {
-            this.$message.error(response.data.msg);
-            this.DeleteImgDialogVisiable = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
 
@@ -325,6 +328,7 @@ export default {
     },
 
     addImgSrc(){
+      var that = this;
       this.$axios
         .post("/api/auth/product/carousel",this.imgForm, {
           withCredentials: false,
@@ -334,14 +338,15 @@ export default {
             this.$message.success(response.data.msg);
             this.AddNewImgDialogVisiable = false;
             this.getProductImg(this.id);
-          } else {
-            this.$message.error(response.data.msg);
-            this.AddNewImgDialogVisiable = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
     handleSubmit(){
-      this.product.fullinfo = this.editorData
+      var that = this;
+      this.product.fullinfo = this.editorData;
       this.$axios
         .put("/api/auth/product",this.product, {
           withCredentials: false,
@@ -349,9 +354,10 @@ export default {
         .then((response) => {
           if (response.data.code == 200) {
             this.$message.success(response.data.msg);
-          } else {
-            this.$message.error(response.data.msg);
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     }
   },

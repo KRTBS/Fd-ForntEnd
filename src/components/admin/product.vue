@@ -91,9 +91,6 @@ export default {
     };
   },
   methods: {
-    aa() {
-      console.log(this.productlist);
-    },
     getProductList() {
       this.$axios
         .get("/api/open/product/list", {
@@ -104,7 +101,6 @@ export default {
         });
     },
     handleEdit(row) {
-      console.log(row.id);
       this.$router.push({ name: "productEdit", params: { id: row.id } });
     },
     handleDelete(row) {
@@ -112,6 +108,7 @@ export default {
       this.dialogDeleteVisible = true;
     },
     confirmAdd(){
+      var that = this;
       this.$axios
         .post("/api/auth/product", this.product, {
           withCredentials: false,
@@ -121,9 +118,10 @@ export default {
             this.$message.success(response.data.msg);
             this.addFormDialogVisible = false;
             this.getProductList();
-          } else {
-            this.$message.error(response.data.msg);
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     },
     handleDelete(row){
@@ -131,6 +129,7 @@ export default {
       this.deleteDialogvisible = true;
     },
     confirmDelete(){
+      var that = this;
       this.$axios
         .delete("/api/auth/product/"+this.id, {
           withCredentials: false,
@@ -140,10 +139,10 @@ export default {
             this.$message.success(response.data.msg);
             this.deleteDialogvisible = false;
             this.getProductList();
-          } else {
-            this.$message.error(response.data.msg);
-            this.deleteDialogvisible = false;
           }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message);
         });
     }
   },

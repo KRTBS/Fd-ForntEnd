@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     login () {
+      var that = this;
       this.$axios
         .post('/login', this.loginForm, {
           withCredentials: false
@@ -50,10 +51,11 @@ export default {
             this.$message.success('Login Successful')
             window.sessionStorage.setItem('token', response.data.data)
             this.$router.push('/home')
-          } else {
-            this.$message.error('Login Failed')
           }
         })
+        .catch(function (error) {
+          that.$message.error(error.message);
+        });
     },
     test () {
       this.$axios
