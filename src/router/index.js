@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '@/components/login.vue'
+import register from '@/components/register'
+
 import home from '@/views/home'
 import about from '@/components/about'
 import main from '@/components/main'
@@ -69,6 +71,10 @@ const routes = [{
     {
         path: '/login',
         component: login
+    },
+    {
+        path: '/register',
+        component: register,
     },
     {
         path: '/admin',

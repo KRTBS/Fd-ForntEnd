@@ -20,9 +20,8 @@
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
-          <el-button @click="login()" type="primary">登录</el-button>
-          <el-button @click="test()" type="info">注册</el-button>
-          <el-button @click="sb()" type="info">sb</el-button>
+          <el-button @click="login()" type="primary">Login</el-button>
+          <el-button @click="register()" type="info">Register</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -57,27 +56,16 @@ export default {
           that.$message.error(error.message);
         });
     },
-    test () {
-      this.$axios
-        .post('/test', {
-          withCredentials: false
-        })
-        .then(function (response) {
-          console.log(response.data)
-        })
+    register () {
+      this.$router.push('/register');
     },
-    sb () {
-      this.$alert('这是一段内容', '标题名称', {
-        confirmButtonText: '确定'
-      })
-    }
   }
 }
 </script>
 
 <style lang="less" scoped>
 .login_container {
-  background-color: #999999;
+  background-color: #dadada;
   height: 100%;
 }
 

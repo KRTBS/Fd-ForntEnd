@@ -22,10 +22,10 @@
       <div class="nav-item">
         <a href="#/information"> INFORMATION </a>
       </div>
-      <div class="nav-item" style="display:none">
+      <div class="nav-item" >
         <a href="#/store"> STORE </a>
       </div>
-      <div class="nav-item">
+      <div class="nav-item" style="display:none">
         <a href="#/about"> ABOUT </a>
       </div>
       <div class="nav-item">
