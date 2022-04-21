@@ -171,197 +171,197 @@
 </template>
 
 <script>
-import wangEditor from "wangeditor";
+import wangEditor from 'wangeditor'
 
 export default {
-  created() {
-    this.id = this.$route.params.id;
+  created () {
+    this.id = this.$route.params.id
 
-    this.getProduct(this.id);
-    this.getProductImg(this.id);
-    this.getProductSelection(this.id);
+    this.getProduct(this.id)
+    this.getProductImg(this.id)
+    this.getProductSelection(this.id)
   },
-  data() {
+  data () {
     return {
-      id: "",
+      id: '',
 
       product: {},
       productImg: [],
       productSelection: [],
 
       tagForm: {
-        id: "",
-        select: "",
-        itemid: "",
+        id: '',
+        select: '',
+        itemid: ''
       },
 
-      imgForm:{
-        id:"",
-        imgsrc:"",
-        itemid:"",
+      imgForm: {
+        id: '',
+        imgsrc: '',
+        itemid: ''
       },
 
       editor: null,
-      editorData: "",
+      editorData: '',
 
-      formLabelWidth: "120px",
+      formLabelWidth: '120px',
 
       AddNewTagDialogVisiable: false,
       DeleteTagDialogVisiable: false,
       AddNewImgDialogVisiable: false,
-      DeleteImgDialogVisiable:false,
-    };
-  },
-  mounted() {
-    const editor = new wangEditor(`#weditor`);
-    editor.config.onchange = (newHtml) => {
-      this.editorData = newHtml;
-    };
-    editor.create();
-    this.editor = editor;
-  },
-  methods: {
-    getProduct(id) {
-      this.$axios
-        .get("/api/open/product/" + id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          this.product = response.data.data;
-          this.editor.txt.append(response.data.data.fullinfo);
-        });
-    },
-    getProductImg(id) {
-      this.$axios
-        .get("/api/open/product/carousel/" + id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          this.productImg = response.data.data;
-        });
-    },
-    getProductSelection(id) {
-      this.$axios
-        .get("/api/open/product/selection/" + id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          this.productSelection = response.data.data;
-          this.radio = response.data.data[0].select;
-        });
-    },
-    handleTagDelete(tag) {
-      this.DeleteTagDialogVisiable = true;
-      this.tagForm = tag;
-    },
-    deleteTag() {
-      var that = this;
-      this.$axios
-        .delete("/api/auth/product/selection/" + this.tagForm.id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.DeleteTagDialogVisiable = false;
-            this.getProductSelection(this.id);
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-
-    handleTagAdd() {
-      this.AddNewTagDialogVisiable = true;
-      this.tagForm.id = "";
-      this.tagForm.itemid = this.id;
-      this.addTag();
-    },
-
-    addTag() {
-      var that = this;
-      this.$axios
-        .post("/api/auth/product/selection",this.tagForm, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.AddNewTagDialogVisiable = false;
-            this.getProductSelection(this.id);
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-
-    handleDelete(row){
-      DeleteImgDialogVisiable = true;
-      this.imgForm = row;
-    },
-
-    deleteImgSrc(){
-      var that = this;
-      this.$axios
-        .delete("/api/auth/product/carousel/" + this.imgForm.id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.DeleteImgDialogVisiable = false;
-            this.getProductImg(this.id);
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-
-    handleImgAdd() {
-      this.AddNewImgDialogVisiable = true;
-      this.imgForm.id = "";
-      this.imgForm.itemid = this.id;
-      this.addImgSrc();
-    },
-
-    addImgSrc(){
-      var that = this;
-      this.$axios
-        .post("/api/auth/product/carousel",this.imgForm, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.AddNewImgDialogVisiable = false;
-            this.getProductImg(this.id);
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-    handleSubmit(){
-      var that = this;
-      this.product.fullinfo = this.editorData;
-      this.$axios
-        .put("/api/auth/product",this.product, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
+      DeleteImgDialogVisiable: false
     }
   },
-};
+  mounted () {
+    const editor = new wangEditor('#weditor')
+    editor.config.onchange = (newHtml) => {
+      this.editorData = newHtml
+    }
+    editor.create()
+    this.editor = editor
+  },
+  methods: {
+    getProduct (id) {
+      this.$axios
+        .get('/api/open/product/' + id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          this.product = response.data.data
+          this.editor.txt.append(response.data.data.fullinfo)
+        })
+    },
+    getProductImg (id) {
+      this.$axios
+        .get('/api/open/product/carousel/' + id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          this.productImg = response.data.data
+        })
+    },
+    getProductSelection (id) {
+      this.$axios
+        .get('/api/open/product/selection/' + id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          this.productSelection = response.data.data
+          this.radio = response.data.data[0].select
+        })
+    },
+    handleTagDelete (tag) {
+      this.DeleteTagDialogVisiable = true
+      this.tagForm = tag
+    },
+    deleteTag () {
+      var that = this
+      this.$axios
+        .delete('/api/auth/product/selection/' + this.tagForm.id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.DeleteTagDialogVisiable = false
+            this.getProductSelection(this.id)
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+
+    handleTagAdd () {
+      this.AddNewTagDialogVisiable = true
+      this.tagForm.id = ''
+      this.tagForm.itemid = this.id
+      this.addTag()
+    },
+
+    addTag () {
+      var that = this
+      this.$axios
+        .post('/api/auth/product/selection', this.tagForm, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.AddNewTagDialogVisiable = false
+            this.getProductSelection(this.id)
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+
+    handleDelete (row) {
+      this.DeleteImgDialogVisiable = true
+      this.imgForm = row
+    },
+
+    deleteImgSrc () {
+      var that = this
+      this.$axios
+        .delete('/api/auth/product/carousel/' + this.imgForm.id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.DeleteImgDialogVisiable = false
+            this.getProductImg(this.id)
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+
+    handleImgAdd () {
+      this.AddNewImgDialogVisiable = true
+      this.imgForm.id = ''
+      this.imgForm.itemid = this.id
+      this.addImgSrc()
+    },
+
+    addImgSrc () {
+      var that = this
+      this.$axios
+        .post('/api/auth/product/carousel', this.imgForm, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.AddNewImgDialogVisiable = false
+            this.getProductImg(this.id)
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+    handleSubmit () {
+      var that = this
+      this.product.fullinfo = this.editorData
+      this.$axios
+        .put('/api/auth/product', this.product, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

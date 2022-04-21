@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    {{ id }}
-
     <div class="inputTitle">
       <span> Title </span>
       <div>
@@ -49,81 +47,81 @@
 </template>
 
 <script>
-import wangEditor from "wangeditor";
+import wangEditor from 'wangeditor'
 
 export default {
-  created() {
-    this.id = this.$route.params.id;
+  created () {
+    this.id = this.$route.params.id
 
     if (this.id != 0) {
-      this.getInformationByID(this.id);
+      this.getInformationByID(this.id)
     }
   },
-  mounted() {
-    const editor = new wangEditor(`#weditor`);
+  mounted () {
+    const editor = new wangEditor('#weditor')
     editor.config.onchange = (newHtml) => {
-      this.editorData = newHtml;
-    };
-    editor.create();
-    this.editor = editor;
+      this.editorData = newHtml
+    }
+    editor.create()
+    this.editor = editor
   },
-  data() {
+  data () {
     return {
-      id: "",
+      id: '',
       information: {
-        id: "",
-        title: "",
-        imgsrc: "",
-        time: "",
-        content: "",
-      },
-    };
+        id: '',
+        title: '',
+        imgsrc: '',
+        time: '',
+        content: ''
+      }
+    }
   },
   methods: {
-    getInformationByID(id) {
+    getInformationByID (id) {
       this.$axios
-        .get("/api/open/information/" + id, {
-          withCredentials: false,
+        .get('/api/open/information/' + id, {
+          withCredentials: false
         })
         .then((response) => {
-          this.information = response.data.data;
-          this.editor.txt.append(response.data.data.content);
-        });
-    },
-    handleUpdate() {
-      this.information.content = this.editorData;
-      this.$axios
-        .put("/api/auth/information", this.information, {
-          withCredentials: false,
+          this.information = response.data.data
+          this.editor.txt.append(response.data.data.content)
         })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.deleteDialogVisible = false;
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
     },
-    handleAddNewItem() {
-      this.information.content = this.editorData;
+    handleUpdate () {
+      this.information.content = this.editorData
       this.$axios
-        .post("/api/auth/information", this.information, {
-          withCredentials: false,
+        .put('/api/auth/information', this.information, {
+          withCredentials: false
         })
         .then((response) => {
           if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.deleteDialogVisible = false;
+            this.$message.success(response.data.msg)
+            this.deleteDialogVisible = false
           }
         })
         .catch(function (error) {
-          that.$message.error(error.message);
-        });
+          that.$message.error(error.message)
+        })
     },
-  },
-};
+    handleAddNewItem () {
+      this.information.content = this.editorData
+      this.$axios
+        .post('/api/auth/information', this.information, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.deleteDialogVisible = false
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

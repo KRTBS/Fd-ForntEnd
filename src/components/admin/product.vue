@@ -67,86 +67,86 @@
 
 <script>
 export default {
-  created() {
-    this.getProductList();
+  created () {
+    this.getProductList()
   },
-  data() {
+  data () {
     return {
-      id:"",
+      id: '',
 
       productlist: [],
       product: {
-        id:"",
-        name: "",
-        imgsrc: "",
-        price: "",
-        briefinfo: "",
-        fullinfo: "",
+        id: '',
+        name: '',
+        imgsrc: '',
+        price: '',
+        briefinfo: '',
+        fullinfo: ''
       },
 
-      addFormDialogVisible:false,
-      deleteDialogvisible:false,
+      addFormDialogVisible: false,
+      deleteDialogvisible: false,
 
-      formLabelWidth: "120px",
-    };
-  },
-  methods: {
-    getProductList() {
-      this.$axios
-        .get("/api/open/product/list", {
-          withCredentials: false,
-        })
-        .then((response) => {
-          this.productlist = response.data.data;
-        });
-    },
-    handleEdit(row) {
-      this.$router.push({ name: "productEdit", params: { id: row.id } });
-    },
-    handleDelete(row) {
-      this.id = row.id;
-      this.dialogDeleteVisible = true;
-    },
-    confirmAdd(){
-      var that = this;
-      this.$axios
-        .post("/api/auth/product", this.product, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.addFormDialogVisible = false;
-            this.getProductList();
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-    handleDelete(row){
-      this.id = row.id;
-      this.deleteDialogvisible = true;
-    },
-    confirmDelete(){
-      var that = this;
-      this.$axios
-        .delete("/api/auth/product/"+this.id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.deleteDialogvisible = false;
-            this.getProductList();
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
+      formLabelWidth: '120px'
     }
   },
-};
+  methods: {
+    getProductList () {
+      this.$axios
+        .get('/api/open/product/list', {
+          withCredentials: false
+        })
+        .then((response) => {
+          this.productlist = response.data.data
+        })
+    },
+    handleEdit (row) {
+      this.$router.push({ name: 'productEdit', params: { id: row.id } })
+    },
+    handleDelete (row) {
+      this.id = row.id
+      this.dialogDeleteVisible = true
+    },
+    confirmAdd () {
+      var that = this
+      this.$axios
+        .post('/api/auth/product', this.product, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.addFormDialogVisible = false
+            this.getProductList()
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+    handleDelete (row) {
+      this.id = row.id
+      this.deleteDialogvisible = true
+    },
+    confirmDelete () {
+      var that = this
+      this.$axios
+        .delete('/api/auth/product/' + this.id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.deleteDialogvisible = false
+            this.getProductList()
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    }
+  }
+}
 </script>
 
 <style>

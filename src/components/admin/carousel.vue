@@ -32,7 +32,6 @@
       </el-table-column>
     </el-table>
 
-
     <el-dialog title="Update" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="ImgSrc" :label-width.sync="formLabelWidth">
@@ -98,11 +97,11 @@
 
 <script>
 export default {
-  created() {
-    this.getCarousel();
-    this.getProductList();
+  created () {
+    this.getCarousel()
+    this.getProductList()
   },
-  data() {
+  data () {
     return {
       carousel: [],
       productlist: [],
@@ -110,104 +109,104 @@ export default {
       dialogAddFormVisible: false,
       dialogDeleteVisible: false,
       form: {
-        id: "",
-        title: "",
-        imgsrc: "",
-        itemid: "",
+        id: '',
+        title: '',
+        imgsrc: '',
+        itemid: ''
       },
 
-      id:"",
+      id: '',
 
-      formLabelWidth: "120px",
-    };
-  },
-  methods: {
-    getCarousel() {
-      this.$axios
-        .get("/api/auth/carousel", {
-          withCredentials: false,
-        })
-        .then((response) => {
-          this.carousel = response.data.data;
-        });
-    },
-    getProductList() {
-      this.$axios
-        .get("/api/open/product/list", {
-          withCredentials: false,
-        })
-        .then((response) => {
-          this.productlist = response.data.data;
-        });
-    },
-    handleEdit(row) {
-      this.dialogFormVisible = true;
-      this.form.id = row.id;
-      this.form.title = row.title;
-      this.form.imgsrc = row.imgsrc;
-    },
-    handleDelete(row) {
-      this.id = row.id;
-      this.dialogDeleteVisible = true;
-    },
-    handleAdd() {
-      this.dialogAddFormVisible = true;
-      this.form = {};
-    },
-
-    confirmUpdateEdit() {
-      var that = this;
-      this.$axios
-        .put("/api/auth/carousel", this.form, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.dialogFormVisible = false;
-            this.getCarousel();
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-    confirmDelete(){
-      var that = this;
-      this.$axios
-        .delete("/api/auth/carousel/"+this.id, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.dialogDeleteVisible = false;
-            this.getCarousel();
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-    confirmAdd(){
-      var that = this;
-      this.$axios
-        .post("/api/auth/carousel", this.form, {
-          withCredentials: false,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.dialogAddFormVisible = false;
-            this.getCarousel();
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
+      formLabelWidth: '120px'
     }
   },
-};
+  methods: {
+    getCarousel () {
+      this.$axios
+        .get('/api/auth/carousel', {
+          withCredentials: false
+        })
+        .then((response) => {
+          this.carousel = response.data.data
+        })
+    },
+    getProductList () {
+      this.$axios
+        .get('/api/open/product/list', {
+          withCredentials: false
+        })
+        .then((response) => {
+          this.productlist = response.data.data
+        })
+    },
+    handleEdit (row) {
+      this.dialogFormVisible = true
+      this.form.id = row.id
+      this.form.title = row.title
+      this.form.imgsrc = row.imgsrc
+    },
+    handleDelete (row) {
+      this.id = row.id
+      this.dialogDeleteVisible = true
+    },
+    handleAdd () {
+      this.dialogAddFormVisible = true
+      this.form = {}
+    },
+
+    confirmUpdateEdit () {
+      var that = this
+      this.$axios
+        .put('/api/auth/carousel', this.form, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.dialogFormVisible = false
+            this.getCarousel()
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+    confirmDelete () {
+      var that = this
+      this.$axios
+        .delete('/api/auth/carousel/' + this.id, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.dialogDeleteVisible = false
+            this.getCarousel()
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    },
+    confirmAdd () {
+      var that = this
+      this.$axios
+        .post('/api/auth/carousel', this.form, {
+          withCredentials: false
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$message.success(response.data.msg)
+            this.dialogAddFormVisible = false
+            this.getCarousel()
+          }
+        })
+        .catch(function (error) {
+          that.$message.error(error.message)
+        })
+    }
+  }
+}
 </script>
 
 <style>

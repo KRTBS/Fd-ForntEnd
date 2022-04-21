@@ -13,6 +13,7 @@
 export default {
   created () {
     this.getArticle(this.$route.params.id)
+    document.body.scrollTop = document.documentElement.scrollTop = 0
   },
   data () {
     return {

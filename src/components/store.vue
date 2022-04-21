@@ -2,7 +2,7 @@
   <div class="storeMain">
     <div class="info">
       <div class="info-img">
-        <el-image :src="storeInfo.imgsrc" fit="cover">
+        <el-image style="width: 100%; height: 100%" :src="storeInfo.imgsrc" fit="cover">
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
           </div>
@@ -22,41 +22,35 @@
         </dl>
       </div>
     </div>
-    <div class="location">
-      <!-- <iframe
-        :src="storeInfo.googlemapsrc"
-        width="1280"
-        height="600"
-        style="border: 0"
-        allowfullscreen=""
-        loading="lazy"
-      ></iframe> -->
-    </div>
+    <!-- <div class="location"> -->
+<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14325.274062699591!2d-80.32532675285643!3d26.153754261542954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d908feeaeded1f%3A0x29c1bf6101ce3a42!2sSawgrass%20Mills!5e0!3m2!1szh-CN!2shk!4v1650027426532!5m2!1szh-CN!2shk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
 export default {
-  created () {
-    this.getStoreInfo()
+  created() {
+    this.getStoreInfo();
   },
-  data () {
+  data() {
     return {
-      storeInfo: {}
-    }
+      storeInfo: {},
+    };
   },
   methods: {
-    getStoreInfo () {
+    getStoreInfo() {
       this.$axios
-        .get('/api/open/information/store', {
-          withCredentials: false
+        .get("/api/open/information/store", {
+          withCredentials: false,
         })
         .then((response) => {
-          this.storeInfo = response.data.data
-        })
-    }
-  }
-}
+          this.storeInfo = response.data.data;
+          console.log(this.storeInfo)
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>

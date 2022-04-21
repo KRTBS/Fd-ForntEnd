@@ -2,7 +2,7 @@
   <div class="infomation">
     <a class="infomation-item" @click="jump(item.id)" v-for="(item,index) in info" :key="index">
       <div class="infoImg">
-        <el-image :src="item.imgsrc" fit="fill">
+        <el-image style="width: 100%; height: 100%" :src="item.imgsrc" fit="cover">
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
           </div>
@@ -18,6 +18,7 @@
 export default {
   created () {
     this.getInformationList()
+    document.body.scrollTop = document.documentElement.scrollTop = 0
   },
   data () {
     return {
@@ -41,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .infomation {
   cursor: pointer;
   width: 1400px;
@@ -61,9 +62,14 @@ export default {
   text-decoration: none;
   color: #757575;
   width: 400px;
-  height: 450px;
+  height: 520px;
   margin-bottom: 50px;
   background-color: rgb(235, 235, 235);
+  transition: all 0.5s;
+  &:hover{
+    box-shadow:0px 12px 15px -15px #000;
+    transform: rotateX(5deg);
+  }
 }
 
 .infomation-item:last-child:nth-child(2n - 1) {
@@ -72,10 +78,11 @@ export default {
 
 .infoImg {
   width: 400px;
-  height: 350px;
+  height: 400px;
 }
 .infomation-item > h1 {
   margin: 0px;
+  margin-top: 20px;
   height: 49px;
   font-size: 25px;
   font-weight: 200;

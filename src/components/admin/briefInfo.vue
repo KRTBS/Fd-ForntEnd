@@ -36,67 +36,67 @@
 </template>
 
 <script>
-import wangEditor from "wangeditor";
+import wangEditor from 'wangeditor'
 
 export default {
-  created() {
-      this.getBeifrIntroduction();
+  created () {
+    this.getBeifrIntroduction()
   },
-  data() {
+  data () {
     return {
       dialogVisible: false,
-      Introduction:{},
+      Introduction: {},
       editor: null,
-      editorData: "",
-    };
+      editorData: ''
+    }
   },
-  mounted() {
-    const editor = new wangEditor(`#weditor`);
+  mounted () {
+    const editor = new wangEditor('#weditor')
     editor.config.onchange = (newHtml) => {
-      this.editorData = newHtml;
-    };
-    editor.create();
-    this.editor = editor;
+      this.editorData = newHtml
+    }
+    editor.create()
+    this.editor = editor
   },
   methods: {
-    getBeifrIntroduction() {
-        var that = this;
-        this.$axios
-        .get("/api/open/introduction/index", {
-          withCredentials: false,
+    getBeifrIntroduction () {
+      var that = this
+      this.$axios
+        .get('/api/open/introduction/index', {
+          withCredentials: false
         })
         .then((response) => {
-          this.Introduction = response.data.data[0];
+          this.Introduction = response.data.data[0]
           this.editor.txt.append(response.data.data[0].content)
         })
         .catch(function (error) {
-          that.$message.error(error.message);
-        });
+          that.$message.error(error.message)
+        })
     },
-    handleSubmit(){
-      this.dialogVisible = true;
+    handleSubmit () {
+      this.dialogVisible = true
     },
-    confirmChanges() {
-      var that = this;
+    confirmChanges () {
+      var that = this
 
-      this.Introduction.content = this.editorData;
+      this.Introduction.content = this.editorData
 
       this.$axios
-        .put("/api/auth/introduction/index", this.Introduction, {
-          withCredentials: false,
+        .put('/api/auth/introduction/index', this.Introduction, {
+          withCredentials: false
         })
         .then((response) => {
           if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.dialogVisible = false;
+            this.$message.success(response.data.msg)
+            this.dialogVisible = false
           }
         })
         .catch(function (error) {
-          that.$message.error(error.message);
-        });
-    },
-  },
-};
+          that.$message.error(error.message)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .footer{
   color: #d6d4cd;
     height: 300px;
@@ -22,5 +22,11 @@ export default {
 
     background-color: #354345;
     padding: 115px;
+
+    span{
+      display: block;
+      margin: 0px auto;
+      text-align: center;
+    }
 }
 </style>

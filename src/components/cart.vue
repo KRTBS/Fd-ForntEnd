@@ -1,33 +1,41 @@
 <template>
   <div class="cart">
-    <span>x1sssdddsdx</span>
     <div class="cart-table">
       <el-table style="width: 100%" :data="orderForm">
-        <el-table-column prop="itemName" label="Name"> </el-table-column>
-        <el-table-column prop="itemSelection" label="Selection">
+        <el-table-column prop="itemName" label="">
+          <template slot-scope="scope">
+            <a
+              @click="jumpToInfoPage(scope.row.itemID)"
+              style="cursor: pointer"
+              >{{ scope.row.itemName }}</a
+            >
+          </template>
         </el-table-column>
-        <el-table-column prop="itemPrice" label="Price"> </el-table-column>
-        <el-table-column prop="itemNum" label="Quantity" width="150">
+        <el-table-column prop="itemSelection" label="" width="150">
+        </el-table-column>
+        <el-table-column prop="itemPrice" label="" width="100">
+        </el-table-column>
+        <el-table-column prop="itemNum" label="" width="200">
           <template slot-scope="scope">
             <el-input-number
               size="mini"
+              controls-position="right"
               v-model="scope.row.itemNum"
               :min="1"
             ></el-input-number>
           </template>
         </el-table-column>
-        <el-table-column prop="subtotal" label="Subtotal" width="100">
+        <el-table-column prop="subtotal" label="" width="150">
           <template slot-scope="scope">
-            <p v-text="scope.row.itemNum * scope.row.itemPrice"></p>
+            <p v-text="'¥' + scope.row.itemNum * scope.row.itemPrice"></p>
           </template>
         </el-table-column>
-
-        <el-table-column label="operation">
+        <el-table-column label="" width="55">
           <template slot-scope="scope">
             <el-button
               type="danger"
               icon="el-icon-delete"
-              circle
+              size="mini"
               @click="handleDelete(scope.$index)"
             ></el-button>
           </template>
@@ -35,121 +43,119 @@
       </el-table>
     </div>
     <div class="subtotal">
-      <div class="total">Subtotal:¥{{ total }}</div>
+      <div>Subtotal:¥{{ total }}</div>
     </div>
     <div class="submit">
-      <div class="submitform">
-        <el-button round @click="submit()">submit</el-button>
-        <el-button round @click="test()">test</el-button>
-        <el-button round @click="dest()">dest</el-button>
-      </div>
+      <el-button type="primary" @click="submit()">submit</el-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  created () {
-    this.orderForm = JSON.parse(localStorage.getItem('orderFormList'))
-
-    this.updataSubtotal()
+  created() {
+    this.orderForm = JSON.parse(localStorage.getItem("orderFormList"));
+    this.updataSubtotal();
   },
 
   watch: {
     orderForm: {
       handler: function (newVal, oldVal) {
         this.orderForm.forEach((element) => {
-          element.subtotal = element.itemNum * element.itemPrice
-          if (this.orderForm != null) {
-            this.updateOrderList(this.orderForm)
+          element.subtotal = element.itemNum * element.itemPrice;
+          if (this.orderForm.length !== 0) {
+            this.updateOrderList(this.orderForm);
           }
-        })
+        });
 
-        this.updataSubtotal()
+        this.updataSubtotal();
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
 
-  data () {
+  data() {
     return {
       num: 1,
       orderForm: [],
       counter: 1,
-      total: 0
-    }
+      total: 0,
+    };
   },
   methods: {
-    updateOrderList (list) {
-      localStorage.setItem('orderFormList', JSON.stringify(list))
-    },
-    updataSubtotal () {
-      this.total = 0
-      for (var value of this.orderForm) {
-        this.total = this.total + value.subtotal
+    updateOrderList(list) {
+      if (list) {
+        localStorage.setItem("orderFormList", JSON.stringify(list));
       }
     },
-    handleDelete (index) {
-      // console.log(index);
-      this.orderForm.splice(index, 1)
+    updataSubtotal() {
+      this.total = 0;
+      for (var value of this.orderForm) {
+        this.total = this.total + value.subtotal;
+      }
     },
-    submit () {
-      this.$axios
-        .post('/api/open/order/submit', this.orderForm, {
-          withCredentials: false
-        })
-        .then((response) => {
-          if (response.data.code === 200) {
-            this.$message.success('Login Successful')
-            // window.sessionStorage.setItem("token", response.data.data);
-            // this.$router.push("/home");
-          }
-        })
-        .catch(function (error) {
-          that.$message.error(error.message);
-        });
+    handleDelete(index) {
+      this.orderForm.splice(index, 1);
+      if (this.orderForm.length == 0) {
+        localStorage.removeItem("orderFormList");
+      }
     },
-    test () {
-      this.$axios
-        .get('/test', {
-          withCredentials: false
-        })
-        .then((response) => {
-          this.$message.success(response.data.data)
-        })
+    submit() {
+      var that = this;
+      if (localStorage.getItem("token") == null) {
+        this.$message.error("Please log in to operate");
+      } else {
+        this.$axios
+          .post("/api/auth/order/submit", this.orderForm, {
+            withCredentials: false,
+          })
+          .then((response) => {
+            if (response.data.code === 200) {
+              this.$message.success("Submit Successful");
+              window.localStorage.removeItem("orderFormList");
+              location.reload();
+            }
+          })
+          .catch(function (error) {
+            that.$message.error(error.message);
+          });
+      }
     },
-    dest () {
-      this.$axios
-        .get('/dest', {
-          withCredentials: false
-        })
-        .then((response) => {
-          this.$message.success(response.data.data)
-        })
-    }
-  }
-}
+    jumpToInfoPage(id) {
+      this.$router.push({ name: "item", params: { id: id } });
+    },
+  },
+};
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .cart {
-  width: 800px;
+  width: 1200px;
   margin: 100px auto;
-  /* background-color: darkcyan; */
 }
 .subtotal {
   line-height: 50px;
   height: 50px;
-  /* background-color: rgb(59, 255, 92); */
+  div {
+    // padding-left: 643px;
+    float: right;
+    font-size: 20px;
+    font-weight: 200;
+  }
 }
-.total {
-  padding-left: 643px;
-  /* float:right; */
+.submit {
+  display: flex;
+  justify-content: flex-end;
+}
+/deep/.el-table th.el-table__cell > .cell {
   font-weight: 200;
+  font-size: 20px;
+  color: #606266;
 }
-.submitform {
-  width: 100px;
-  margin: 0 auto;
+/deep/.el-table td.el-table__cell div {
+  font-weight: 200;
+  font-size: 20px;
+  color: #606266;
 }
 </style>

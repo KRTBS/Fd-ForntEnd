@@ -7,20 +7,22 @@ import './assets/css/global.css'
 import axios from 'axios'
 import qs from 'qs'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8080'
+axios.defaults.baseURL = 'http://127.0.0.1:8080';
 
 axios.interceptors.request.use(config => {
-  config.headers.Authorization = window.sessionStorage.getItem('token')
-  return config
-})
+    config.headers.Authorization = window.localStorage.getItem('token')
+    return config
+});
 
-Vue.prototype.$axios = axios
-Vue.prototype.$qs = qs
+Vue.prototype.$axios = axios;
+Vue.prototype.$qs = qs;
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+export const eventBus = new Vue();
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app');

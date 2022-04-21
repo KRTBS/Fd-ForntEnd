@@ -4,7 +4,7 @@
       <div class="itemimg">
         <el-carousel height="620px">
           <el-carousel-item v-for="(item, index) in productImg" :key="index">
-            <el-image :src="item.imgsrc" fit="fill">
+            <el-image style="width: 100%; height: 100%" :src="item.imgsrc" fit="fill">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -49,6 +49,8 @@ export default {
     this.getProduct(this.id)
     this.getProductImg(this.id)
     this.getProductSelection(this.id)
+
+    document.body.scrollTop = document.documentElement.scrollTop = 0
   },
   data () {
     return {
@@ -73,16 +75,6 @@ export default {
   },
   methods: {
     add () {
-      console.log(
-        this.product.name +
-          '/' +
-          this.product.price +
-          '/' +
-          this.radio +
-          '/' +
-          this.num
-      )
-
       this.orderForm.itemID = this.id
       this.orderForm.itemName = this.product.name
       this.orderForm.itemPrice = this.product.price
@@ -146,7 +138,6 @@ export default {
 }
 .item-main {
   width: 100%;
-  /* height: 700px; */
   background-color: rgb(250, 250, 250);
   *zoom: 1;
 }
@@ -162,15 +153,12 @@ export default {
   width: 620px;
   height: 620px;
   float: left;
-  background-color: burlywood;
+  background-color: rgb(250, 250, 250);
 }
 .itemtext {
   width: 580px;
   height: auto;
   padding: 40px 20px;
-  /* padding-top: 40px;
-  padding-bottom: 40px; */
-  /* background-color: aqua; */
   float: right;
 }
 .itemtext h1 {
@@ -201,6 +189,6 @@ export default {
   width: 1180px;
   padding: 150px 50px;
   margin: 0 auto;
-  background-color: blueviolet;
+  background-color: rgb(250, 250, 250);
 }
 </style>

@@ -61,59 +61,59 @@
 
 <script>
 export default {
-  created() {
-    this.getInformationList();
+  created () {
+    this.getInformationList()
   },
-  data() {
+  data () {
     return {
-      id: "",
+      id: '',
 
       info: [],
 
-      deleteDialogVisible: false,
-    };
+      deleteDialogVisible: false
+    }
   },
   methods: {
-    show() {
-      console.log(this.value1);
+    show () {
+      console.log(this.value1)
     },
-    getInformationList() {
+    getInformationList () {
       this.$axios
-        .get("/api/open/information/all", {
-          withCredentials: false,
+        .get('/api/open/information/all', {
+          withCredentials: false
         })
         .then((response) => {
-          this.info = response.data.data;
-        });
+          this.info = response.data.data
+        })
     },
-    jumpToEdit(row) {
-      this.$router.push({ name: "infoEdit", params: { id: row.id } });
+    jumpToEdit (row) {
+      this.$router.push({ name: 'infoEdit', params: { id: row.id } })
     },
-    jumpToAdd() {
-      this.$router.push({ name: "infoEdit", params: { id: 0 } });
+    jumpToAdd () {
+      this.$router.push({ name: 'infoEdit', params: { id: 0 } })
     },
-    handleDelete(row) {
-    this.id = row.id;
-    this.deleteDialogVisible = true;
+    handleDelete (row) {
+      this.id = row.id
+      this.deleteDialogVisible = true
     },
-    confirmDelete(){
-        this.$axios
-        .delete("/api/auth/information/" + this.id, {
-          withCredentials: false,
+    confirmDelete () {
+      this.$axios
+        .delete('/api/auth/information/' + this.id, {
+          withCredentials: false
         })
         .then((response) => {
           if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.deleteDialogVisible = false;
-            this.getInformationList();
+            this.$message.success(response.data.msg)
+            this.deleteDialogVisible = false
+            this.getInformationList()
           }
         })
         .catch(function (error) {
-          that.$message.error(error.message);
-        });
+          that.$message.error(error.message)
+        })
     }
-  },
-};
+  }
+}
 </script>
 
 <style>

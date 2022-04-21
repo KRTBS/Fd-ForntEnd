@@ -30,11 +30,11 @@
         <span slot="title">Information</span>
       </el-menu-item>
 
-      <el-menu-item index="8">
+      <el-menu-item index="/orderForm">
         <span slot="title">OrderList</span>
       </el-menu-item>
 
-      <el-menu-item index="9">
+      <el-menu-item index="/">
         <span slot="title">LoginOut</span>
       </el-menu-item>
 
@@ -43,18 +43,18 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>
 .el-aside {
   height: 100vh;
-  background-color: bisque;
+  /* background-color: bisque; */
   color: #333;
   text-align: center;
   line-height: 200px;
 }
 .aside-head {
-  height: 60px;
+  height: 85px;
 }
 </style>

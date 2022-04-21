@@ -15,14 +15,14 @@
 </template>
 
 <script>
-import maside from '@/components/admin/aside.vue';
+import maside from '@/components/admin/aside.vue'
 import mheader from '@/components/admin/header.vue'
 export default {
-  components:{
-      maside,
-      mheader
+  components: {
+    maside,
+    mheader
   }
-};
+}
 </script>
 
 <style scoped>

@@ -5,7 +5,10 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods:{
+  }
+}
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '@/components/login.vue'
-import register from '@/components/register'
+import regist from '@/components/regist'
 
 import home from '@/views/home'
 import about from '@/components/about'
@@ -22,6 +22,11 @@ import productEdit from '@/components/admin/productEdit'
 import storeAdmin from '@/components/admin/storeAdmin'
 import info from '@/components/admin/info'
 import infoEdit from '@/components/admin/infoEdit'
+import orderForm from '@/components/admin/orderForm'
+
+import user from '@/components/user'
+import userInfo from '@/components/userInfo'
+import userOrder from '@/components/userOrder'
 
 Vue.use(VueRouter)
 
@@ -65,76 +70,91 @@ const routes = [{
             {
                 path: '/cart',
                 component: cart
+            },
+            {
+                path: '/regist',
+                name: 'regist',
+                component: regist
+            },
+            {
+                path: '/login',
+                component: login
+            },
+            {
+                path: '/user',
+                component: user,
+                redirect: '/userinfo',
+                children: [{
+                    path: '/userinfo',
+                    component: userInfo
+                }, {
+                    path: '/userOrder',
+                    component: userOrder
+                }]
             }
         ]
-    },
-    {
-        path: '/login',
-        component: login
-    },
-    {
-        path: '/register',
-        component: register,
     },
     {
         path: '/admin',
         component: admin,
         children: [{
                 path: '',
-                component: welcome,
+                component: welcome
             },
             {
                 path: '/welcome',
-                component: welcome,
+                component: welcome
             },
             {
                 path: '/carousel',
-                component: carousel,
+                component: carousel
             },
             {
                 path: '/beiefinfo',
-                component: briefInfo,
+                component: briefInfo
             },
             {
                 path: '/productAdmin',
-                component: productAdmin,
+                component: productAdmin
             },
             {
                 path: '/productEdit/:id',
                 name: 'productEdit',
-                component: productEdit,
+                component: productEdit
             },
             {
                 path: '/storeAdmin',
-                component: storeAdmin,
+                component: storeAdmin
             },
             {
                 path: '/info',
-                component: info,
+                component: info
             },
             {
                 path: '/infoEdit/:id',
                 name: 'infoEdit',
-                component: infoEdit,
+                component: infoEdit
+            },
+            {
+                path: '/orderForm',
+                name: 'orderForm',
+                component: orderForm
             }
         ]
-    }
+    },
 ]
 
 const router = new VueRouter({
     routes
 })
 
-//路由导航守卫
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/login') {
-//     return next();
-//   }
-//   const tokenStr = window.sessionStorage.getItem('token');
-//   if(!tokenStr){
-//     return next('/login')
-//   }
-//   next()
-// })
+// 路由导航守卫
+router.beforeEach((to, form, next) => {
+    if (to.path === '/admin' && window.localStorage.getItem("Role") !== "Admin") {
+        next({ path: "/home" })
+    } else {
+        next()
+    }
+})
 
 export default router

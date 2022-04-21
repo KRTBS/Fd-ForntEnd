@@ -1,18 +1,17 @@
 <template>
   <div class="header">
-    <span>headerx</span>
+    <span>Management System</span>
   </div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style scoped>
 .header {
-  background-color: #b3c0d1;
   color: #333;
   text-align: center;
-  line-height: 60px;
+  line-height: 85px;
 }
 </style>

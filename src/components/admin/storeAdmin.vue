@@ -82,24 +82,24 @@
 
 <script>
 export default {
-  created() {
-    this.getStoreInfo();
+  created () {
+    this.getStoreInfo()
   },
-  data() {
+  data () {
     return {
       information: {
-        imgsrc: "",
-        briefinfo: "",
-        address: "",
-        telephone: "",
-        businesshours: "",
-        offdays: "",
-        googlemapsrc: "",
-      },
-    };
+        imgsrc: '',
+        briefinfo: '',
+        address: '',
+        telephone: '',
+        businesshours: '',
+        offdays: '',
+        googlemapsrc: ''
+      }
+    }
   },
   methods: {
-    getStoreInfo() {
+    getStoreInfo () {
       this.$axios
         .get('/api/open/information/store', {
           withCredentials: false
@@ -108,24 +108,24 @@ export default {
           this.information = response.data.data
         })
     },
-    submit(){
-      var that = this;
+    submit () {
+      var that = this
       this.$axios
-        .put("/api/auth/information/store",this.information, {
-          withCredentials: false,
+        .put('/api/auth/information/store', this.information, {
+          withCredentials: false
         })
         .then((response) => {
           if (response.data.code == 200) {
-            this.$message.success(response.data.msg);
-            this.getStoreInfo();
+            this.$message.success(response.data.msg)
+            this.getStoreInfo()
           }
         })
         .catch(function (error) {
-          that.$message.error(error.message);
-        });
+          that.$message.error(error.message)
+        })
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

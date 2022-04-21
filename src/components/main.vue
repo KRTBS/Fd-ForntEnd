@@ -5,7 +5,7 @@
         <el-carousel height="500px" direction="vertical" :autoplay="true">
           <el-carousel-item v-for="(item, index) in carousel" :key="index">
             <div class="carousel-img">
-              <el-image :src="item.imgsrc" fit="fill">
+              <el-image style="width: 100%; height: 100%" :src="item.imgsrc" fit="cover">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -24,7 +24,7 @@
 
     <div class="about">
       <div class="about-img">
-        <el-image :src="intd.imgsrc" fit="fill">
+        <el-image style="width: 100%; height: 100%" :src="intd.imgsrc" fit="fill">
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
           </div>
@@ -41,7 +41,7 @@
     <div class="info">
       <a class="info-item" @click="jump(item.id)" v-for="item in info">
         <div class="infoImga">
-          <el-image :src="item.imgsrc" fit="fill">
+          <el-image style="width: 100%; height: 100%" :src="item.imgsrc" fit="cover">
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
             </div>
@@ -60,6 +60,8 @@ export default {
     this.getInformation()
     this.getBriefIntroduction()
     this.getCarousel()
+
+    document.body.scrollTop = document.documentElement.scrollTop = 0
   },
   data () {
     return {
@@ -106,7 +108,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .main {
   width: 1400px;
   padding: 150px 60px;
@@ -164,12 +166,12 @@ export default {
   top: 50%;
   right: 0%;
   transform: translate(0%, -50%);
-}
-.about-text h1 {
-  font-size: 32px;
-  line-height: 50px;
-  height: 50px;
-  font-weight: 200;
+  h1 {
+    font-size: 32px;
+    line-height: 50px;
+    height: 50px;
+    font-weight: 200;
+  }
 }
 .about-text p {
   font-size: 16px;
@@ -193,6 +195,11 @@ export default {
   width: 300px;
   height: 400px;
   background-color: rgb(235, 235, 235);
+  transition: all 0.5s;
+  &:hover{
+    box-shadow:0px 12px 15px -15px #000;
+    transform: rotateX(5deg);
+  }
 }
 .infoImga {
   width: 300px;
@@ -234,5 +241,11 @@ export default {
   margin-left: 220px;
   transform: translateX(-50%);
   background-color: transparent;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: rgb(255, 255, 255);
+    color: #757575;
+  }
 }
 </style>
